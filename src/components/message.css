@@ -1,0 +1,42 @@
+.a-message {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  padding: 12px 20px;
+  right: 20px;
+  top: 15px;
+  z-index: 9999;
+  min-height: 68px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  color: #666666;
+  transition: all 0.3s;
+  visibility: visible;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .08);
+}
+.a-message-hidden {
+  visibility: hidden;
+  right: -500px;
+}
+.a-message-success {
+  background-color: #def7de;
+}
+.a-message-error {
+  background-color: #fdefef;
+  color: red;
+}
+.a-message-warn {
+  background-color: #f0f4fe;
+}
+.a-messgae-warning { 
+  background-color: #fef8ea;
+}
+
+.a-message-content {
+  width: 380px;
+  word-break: break-all;
+}
+.a-message-close {
+  cursor: pointer;
+}

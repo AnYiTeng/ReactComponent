@@ -1,0 +1,35 @@
+.invalid-btn {
+  margin-right: 10px;
+}
+.open-btn {
+  width: 138px;
+  height: 30px;
+  margin-right: 10px;
+}
+.skill-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #4d7fff;
+  cursor: pointer;
+  transition: 1s;
+  border-radius: 6px;
+  padding-left: 6px;
+}
+.skill-container:hover {
+  background-color: skyblue;
+}
+.skill-code {
+  color: #333333;
+  width: 16px;
+}
+.skill-name {
+  margin-left: 10px;
+}
+.load {
+  background-color: aqua;
+}
+.input {
+  color: salmon;
+}
