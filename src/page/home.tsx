@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { DropList } from '../global/globalType'
 import AButton from '../components/button'
 import AModal from '../components/modal'
 import ALoad from '../components/load'
@@ -8,7 +9,7 @@ import AInplaceEditor from '../components/inplaceEditor'
 import ACollapse from '../components/collapse'
 import AComment from '../components/comment'
 import ADropdown from '../components/dropdown'
-import { DropList } from '../global/globalType'
+import ACarousel from '../components/carousel'
 import './home.css'
 // import { MuxMessage } from '@alife/mux-components'
 
@@ -172,12 +173,7 @@ export default function HomePage () {
         className="mt10"
         nameProps="lisangzhuo"
       />
-      <ADropdown className="mt10" dropList={dropList}/>
-      <AButton
-        style={{marginTop: "10px"}}
-        children="成功提示"
-      />
-      <AButton onFocus={() => console.log('点击完毕')} children="测试按钮" />
+      {/* <ADropdown className="mt10" dropList={dropList}/> */}
     </div>
   )
 }

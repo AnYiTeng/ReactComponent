@@ -1,8 +1,8 @@
 /**
  * 路由配置文件
  */
-import React from 'react'
 import HomePage from './page/home'
+import TestView from './page/testView'
 
 export default [
   {
@@ -13,4 +13,9 @@ export default [
     path: '/home',
     component: HomePage
   },
+  // 测试页面
+  {
+    path: '/testView',
+    component: TestView
+  }
 ]
