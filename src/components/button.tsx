@@ -2,12 +2,16 @@ import React, { CSSProperties, ReactNode } from 'react'
 import './button.css'
 import classnames from 'classnames'
 
-interface IABtn {
+// button: DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+// input:  DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+
+interface IABtn extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   classname?: string
   style?: CSSProperties
   children?: string
   onChange?: () => void
   canClick?: boolean
+  types?: 'normal' | 'link'
 }
 
 export default function AButton (props: IABtn) {
@@ -16,7 +20,9 @@ export default function AButton (props: IABtn) {
     style, 
     children = '按钮',
     onChange,
-    canClick = true
+    canClick = true,
+    types = 'normal',
+    ...otherProps
   } = props
 
   const clickBtn = () => {
@@ -27,12 +33,13 @@ export default function AButton (props: IABtn) {
     'a-button', 
     classname,
     {
-      'a-button-lose-efficacy': !canClick
+      'a-button-lose-efficacy': !canClick,
+      'a-button-link': types === 'link'
     }
   )
   return (
     <>
-      <button style={style} className={cls} onClick={clickBtn}>{children}</button>
+      <button {...otherProps} style={style} className={cls} onClick={clickBtn}>{children}</button>
     </>
   )
 }

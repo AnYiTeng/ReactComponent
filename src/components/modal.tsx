@@ -8,7 +8,7 @@ interface IAModal {
   classname?: string
   style?: CSSProperties
   titleText?: string
-  children?: ReactNode
+  children?: ReactNode | string
   visible?: boolean
   onConfirm?: () => void
   onCancle?: () => void
@@ -52,7 +52,7 @@ export default function AModal (props: IAModal) {
         visible &&
         <div style={style} className={cls}>
           <div className="a-modal">
-            <div className="a-modal-title">{titleText}</div>
+            {titleText && <div className="a-modal-title">{titleText}</div> }
             <div className="a-modal-body">{children}</div>
             <div className="a-modal-footer">
               {

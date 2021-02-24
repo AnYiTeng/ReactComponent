@@ -1,6 +1,6 @@
 .a-button {
-  color: #5a2cff;
-  border: 1px solid #5a2cff;
+  color: var(--app-main-caolor);
+  border: 1px solid var(--app-main-caolor);
   border-radius: 6px;
   height: 30px;
   outline: none;
@@ -9,4 +9,8 @@
 .a-button-lose-efficacy{
   pointer-events: none;
   opacity: .5;
+}
+.a-button-link {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
 }

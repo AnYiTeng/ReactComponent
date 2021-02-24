@@ -1,3 +1,9 @@
+.main {
+  padding: 10px;
+}
+.text {
+  color: var(--app-main-caolor);
+}
 .invalid-btn {
   margin-right: 10px;
 }
@@ -32,4 +38,19 @@
 }
 .input {
   color: salmon;
+}
+.inplace-wrapper {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.inplace-editor {
+  margin-left: 10px;
+}
+.collapse-wrapper {
+  width: 500px;
+  color: red;
+}
+.mt10 {
+  margin-top: 10px;
 }

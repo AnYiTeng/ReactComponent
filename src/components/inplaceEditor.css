@@ -1,0 +1,19 @@
+.a-inplace-editor {
+  display: inline-block;
+}
+.a-inplace-show-wrapper {
+  border-bottom: 1px solid #d8d8d8;
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  cursor: pointer;
+}
+.a-inplace-show {
+  transition: border-color .2s;
+}
+.a-inplace-show:hover {
+  border-bottom: 1px solid var(--app-main-caolor);
+}
+.a-inplace-disable {
+  color: #d8d8d8;
+}

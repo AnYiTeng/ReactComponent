@@ -1,17 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AButton from '../components/button'
 import AModal from '../components/modal'
 import ALoad from '../components/load'
 import AInput from '../components/input'
-import AMessage from '../components/message'
+import {AMessage} from '../components/message'
+import AInplaceEditor from '../components/inplaceEditor'
+import ACollapse from '../components/collapse'
+import AComment from '../components/comment'
+import ADropdown from '../components/dropdown'
+import { DropList } from '../global/globalType'
 import './home.css'
+// import { MuxMessage } from '@alife/mux-components'
 
 export default function HomePage () {
   const [ modalVisible, setModalVisible ] = useState(false)
   const [ loading, setLoading ] = useState(false)
+  const [ inputValue, setInputValue ] = useState('123')
+  const [ inplaceEditorValue1, setInplaceEditorValue1 ] = useState(100)
+  const [ inplaceEditorValue2, setInplaceEditorValue2 ] = useState(100)
+  const [ inplaceEditorValue3, setInplaceEditorValue3 ] = useState('200元')
+  const [ dropList, setDropList ] = useState<DropList[]>([])
+
+  useEffect(() => {
+    setDropList([
+      {value: 0, label: '选项1'},
+      {value: 1, label: '选项2'},
+    ])
+  }, [])
 
   const toOpeanModal = () => {
-    console.log('打开弹窗')
     setModalVisible(true)
   }
 
@@ -26,7 +43,9 @@ export default function HomePage () {
     }, 1000)
   }
 
-  const openSuccessMessage = () => <AMessage type="success" />
+  const openSuccessMessage = () => {
+    // return AMessage({}).success
+  }
 
   const modalChildren = () => {
     return (
@@ -51,12 +70,13 @@ export default function HomePage () {
     )
   }
 
-  function onchange<T>(e: T) {
-    console.log(e, '!!!')
+  const toClick = () => {
+    console.log(1111)
   }
 
   return (
-    <div>
+    <div className="main">
+      {/* <div className="text">以铜为镜，可以正衣冠；以史为镜，可以知兴替；以人为镜，可以明得失。</div> */}
       <AButton
         classname="invalid-btn"
         canClick={false}
@@ -66,6 +86,11 @@ export default function HomePage () {
         onChange={toOpeanModal}
         classname="open-btn"
         children="打开弹窗"
+      />
+      <AButton
+        classname="invalid-btn"
+        children="链接按钮"
+        types="link"
       />
       <AModal 
         visible={modalVisible}
@@ -83,12 +108,23 @@ export default function HomePage () {
       />
       <AInput
         classname="input"
-        onChange={onchange}
         placeHolder="请输入你想输入的内容"
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
       />
-      <AMessage
-        type="error"
-        content="错误信息"
+      <AInput
+        classname="input"
+        placeHolder="请输入你想输入的内容"
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
+        size="small"
+      />
+      <AInput
+        classname="input"
+        placeHolder="请输入你想输入的内容"
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
+        size="big"
       />
       <br/>
       <AButton
@@ -96,6 +132,52 @@ export default function HomePage () {
         onChange={openSuccessMessage}
         children="成功提示"
       />
+      <br/>
+      <div className="inplace-wrapper">
+        只能输入数字:
+        <AInplaceEditor
+          style={{marginLeft: "10px"}}
+          format={inplaceEditorValue1 => (+inplaceEditorValue1).toFixed(2)}
+          value={inplaceEditorValue1}
+          onChange={(v) => setInplaceEditorValue1(v)}
+        />
+      </div>
+      <div className="inplace-wrapper">
+        中英混合:
+        <AInplaceEditor
+          className="inplace-editor"
+          value={inplaceEditorValue2}
+          onChange={(v) => setInplaceEditorValue2(v)}
+        /> 
+      </div>
+      <div className="inplace-wrapper">
+        禁止更改:
+        <AInplaceEditor
+          style={{marginLeft: "10px"}}
+          value={inplaceEditorValue3}
+          disable={true}
+        />
+      </div>
+      <ACollapse
+        titleText="点击展开"
+        contentText="展开的内容"
+        isUnfold={true}
+        className="collapse-wrapper"
+      />
+      <ACollapse
+        titleText="点击展开"
+        contentText="展开的内容"
+      />
+      <AComment 
+        className="mt10"
+        nameProps="lisangzhuo"
+      />
+      <ADropdown className="mt10" dropList={dropList}/>
+      <AButton
+        style={{marginTop: "10px"}}
+        children="成功提示"
+      />
+      <AButton onFocus={() => console.log('点击完毕')} children="测试按钮" />
     </div>
   )
 }

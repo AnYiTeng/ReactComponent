@@ -12,7 +12,7 @@
 .a-load-item { 
   width: 4px;
   height: 50%;
-  background-color: #5a2cff;
+  background-color: var(--app-main-caolor);
   margin-right: 4px;
   border-radius: 2px;
   animation: loadMove 1.2s infinite;

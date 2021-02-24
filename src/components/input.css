@@ -1,8 +1,14 @@
 .a-input {
   outline: none;
-  border: 1px solid #5a2cff;
+  border: 1px solid var(--app-main-caolor);
   width: 220px;
   height: 30px;
   border-radius: 10px;
   padding: 0 10px;
+}
+.a-input-small {
+  height: 20px;
+}
+.a-input-big {
+  height: 40px;
 }
