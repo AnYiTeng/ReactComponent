@@ -12,7 +12,8 @@
     "react-onclickoutside": "^6.9.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "react-use-gesture": "^7.0.16"
   },
   "scripts": {
     "start": "react-scripts start",

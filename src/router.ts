@@ -15,7 +15,7 @@ export default [
   },
   // 测试页面
   {
-    path: '/testView',
+    path: '/test',
     component: TestView
   }
 ]

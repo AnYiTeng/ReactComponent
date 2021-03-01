@@ -174,6 +174,50 @@ export default function HomePage () {
         nameProps="lisangzhuo"
       />
       {/* <ADropdown className="mt10" dropList={dropList}/> */}
+
+      <ACarousel />
     </div>
   )
+}
+
+
+// q1.
+new Promise(resolve => {
+  setTimeout(() => {
+    resolve(1)
+  }, 1000)
+})
+  .then(data => 2)
+  .then(data => console.log(data)) // 2
+  .catch(err => console.error(err))
+  .finally(() => {
+    console.log('hello world')
+  })  // hello world
+
+// q2.
+Promise.all([
+  new Promise(resolve => setTimeout(() => resolve(1), 1000)),
+  new Promise(resolve => setTimeout(() => resolve(2), 2000)),
+  new Promise(resolve => setTimeout(() => resolve(3), 3000)),
+])
+  .then(datas => console.log(datas))  // [1, 2, 3]
+
+// answer
+class IPromise {
+  constructor () {
+
+  }
+  static all () {
+
+  }
+}
+
+
+// q3.
+const version = ['1.4.5', '2.1.1', '2.3.0', '1.15.0', '6.1', '3', '3.3.3.3.3.3', '7']
+// ['1.4.5', '1.15.0', '2.1.1', '2.3.0', '3', '3.3.3.3.3.3', '6.1', '7']
+
+// version sort
+const sortVersion = (versions: string[]) => {
+  // 
 }
