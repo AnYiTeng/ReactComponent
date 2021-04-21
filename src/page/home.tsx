@@ -11,6 +11,7 @@ import AComment from '../components/comment'
 import ADropdown from '../components/dropdown'
 import ACarousel from '../components/carousel'
 import './home.css'
+import { Link } from 'react-router-dom'
 // import { MuxMessage } from '@alife/mux-components'
 
 export default function HomePage () {
@@ -71,12 +72,12 @@ export default function HomePage () {
     )
   }
 
-  const toClick = () => {
-    console.log(1111)
-  }
-
   return (
     <div className="main">
+      <Link to="/test">
+        去往测试页面
+      </Link>
+
       {/* <div className="text">以铜为镜，可以正衣冠；以史为镜，可以知兴替；以人为镜，可以明得失。</div> */}
       <AButton
         classname="invalid-btn"

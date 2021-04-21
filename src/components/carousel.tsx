@@ -20,7 +20,7 @@ export default function ACarousel (props: IACarouselProps) {
   const {
     className,
     style,
-    children=[<img src="https://mmsite.alicdn.com/42deaf65-3c70-4281-91d1-40a9e7ac0441.jpg"/>, <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png"/>, <img src="http://mmsite.alicdn.com/cc826113-ceb2-4313-9d0b-1157c34828c0.jpg"/>],
+    children=[<img src="https://mmsite.alicdn.com/42deaf65-3c70-4281-91d1-40a9e7ac0441.jpg"/>, <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png"/>, <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png"/>],
     duration=1000,
     currentIndex=1
   } = props
@@ -29,29 +29,6 @@ export default function ACarousel (props: IACarouselProps) {
   const [active, setActive] = useState(currentIndex)
 
   const autoPlayIntervalRef = useRef<any>(null)
-  const isDraged = useRef(false)
-
-  // const bind = useGesture({
-  //   onDragStart: () => {
-  //     isDraged.current = false
-  //   },
-  //   onDrag: ({ movement: [x] }) => {
-  //     if (isDraged.current) {
-  //       return
-  //     }
-  //     // console.log()
-  //     if (x > 50) {
-  //       hanldPrev()
-  //       isDraged.current = true
-  //     } else if (x < -50) {
-  //       hanldNext()
-  //       isDraged.current = true
-  //     }
-  //   },
-  //   onDragEnd: () => {
-  //     isDraged.current = false
-  //   }
-  // })
 
   const cls = classnames(
     'a-carousel',
@@ -113,13 +90,38 @@ export default function ACarousel (props: IACarouselProps) {
     }
   }
 
+  const isDraged = useRef(false)
+  const bind = useGesture({
+    onDragStart: () => {
+      stop()
+      isDraged.current = false
+    },
+    onDrag: ({ movement: [x] }) => {
+      if (isDraged.current) {
+        return
+      }
+      console.log(isDraged, x, 'isDraged')
+      if (x > 50) {
+        hanldPrev()
+        isDraged.current = true
+      } else if (x < -50) {
+        hanldNext()
+        isDraged.current = true
+      }
+    },
+    onDragEnd: () => {
+      isDraged.current = false
+      autoPlay()
+    }
+  })
+
   return (
     <>
-      {/* <div { ...bind() } ref={container} className={cls}> */}
-      <div ref={container} className={cls}>
+      <div { ...bind() } ref={container} className={cls}>
+      {/* <div ref={container} className={cls}> */}
         <div id="carouselContainer" ref={allCarouselContainer} className="a-carousel-container">
           {
-            React.Children.map(children, (child, index) => {
+            containerWidth && React.Children.map(children, (child, index) => {
               return(
                 <div style={{left: index * containerWidth}} className="a-carousel-item">
                   {child}

@@ -9,7 +9,11 @@ const SecondTestView = (props: ISecond, ref: any) => {
   let {secondNum, setSecondNum} = props
   let [childNum, setChildNum] = useState(100)
 
-  useImperativeHandle(ref, () => addChildNum)
+  useImperativeHandle(ref, () => {
+    return {
+      addChildNum
+    }
+  })
 
   const addChildNum = () => {
     setChildNum(childNum++)

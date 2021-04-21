@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import routers from './router'
-import HomePage from './page/home'
+
+export const TestContext = createContext()
 
 function App() {
   return (

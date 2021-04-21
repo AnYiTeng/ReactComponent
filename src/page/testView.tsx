@@ -1,5 +1,8 @@
 import React, { useState, useMemo, useEffect, useCallback, useLayoutEffect, useRef } from 'react'
 import SecondTestView from './secondTestView'
+import First from './testChild/first'
+import {TestContext} from '../App'
+import AButton from '../components/button'
 
 const nameList = ['apple', 'peer', 'banana', 'lemon']
 
@@ -8,6 +11,8 @@ export default function TestView () {
   const [name, setName] = useState('apple')
   const [count, setCount] = useState(0)
   const [secondNum, setSecondNum] = useState(0)
+
+  let [num, setNum] = useState(0)
 
   const getProductName = () => {
     return name
@@ -48,6 +53,10 @@ export default function TestView () {
     console.log(secondTestViewRef.current, 'secondTestViewRef')
   }, [])
 
+  const add = () => {
+    setNum(num++)
+  }
+
   return (
     <>
       <p>{name}</p>
@@ -64,6 +73,13 @@ export default function TestView () {
       <h1 ref={h1Ref}>
         我是一个h1标签
       </h1>
+
+      <TestContext.Provider value={num}>
+        <First/>
+        <AButton onChange={() => add()}>
+          context测试加
+        </AButton>
+      </TestContext.Provider>
     </>
   )
 }
