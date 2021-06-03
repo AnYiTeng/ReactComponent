@@ -1,4 +1,6 @@
 import React, { useState, useRef, Dispatch, SetStateAction, useEffect, forwardRef, useImperativeHandle } from 'react'
+import useTextHoxModel from '../common/hox/test'
+import AInput from '../components/input'
 
 interface ISecond {
   secondNum: number
@@ -8,6 +10,8 @@ interface ISecond {
 const SecondTestView = (props: ISecond, ref: any) => {
   let {secondNum, setSecondNum} = props
   let [childNum, setChildNum] = useState(100)
+
+  const {testHox, decrement, increment} = useTextHoxModel()
 
   useImperativeHandle(ref, () => {
     return {
@@ -23,6 +27,9 @@ const SecondTestView = (props: ISecond, ref: any) => {
     <>
       <div>
         <button onClick={() => setSecondNum(secondNum += 1)}>+1  {secondNum}</button>
+        <p>---HOX测试的第二个页面---</p>
+        <AInput value={testHox} onChange={increment}/>
+        <p>---HOX测试的第二个页面---</p>
       </div>
     </>
   )

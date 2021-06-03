@@ -57,7 +57,7 @@ export default function AInplaceEditor (props: IAInplaceEditor) {
           <AButton
             style={{marginLeft: '10px'}}
             children="确定"
-            onChange={confirmValue}
+            onClick={confirmValue}
           />
         </div> :
         <div className={showcls} onClick={disable ? () => {} : toChangeValue}>

@@ -3,6 +3,7 @@ import SecondTestView from './secondTestView'
 import First from './testChild/first'
 import {TestContext} from '../App'
 import AButton from '../components/button'
+import useTextHoxModel from '../common/hox/test'
 
 const nameList = ['apple', 'peer', 'banana', 'lemon']
 
@@ -11,8 +12,9 @@ export default function TestView () {
   const [name, setName] = useState('apple')
   const [count, setCount] = useState(0)
   const [secondNum, setSecondNum] = useState(0)
-
   let [num, setNum] = useState(0)
+
+  const {testHox, decrement, increment} = useTextHoxModel()
 
   const getProductName = () => {
     return name
@@ -76,10 +78,17 @@ export default function TestView () {
 
       <TestContext.Provider value={num}>
         <First/>
-        <AButton onChange={() => add()}>
+        <AButton onClick={() => add()}>
           context测试加
         </AButton>
       </TestContext.Provider>
+      {/* hox练习 */}
+      <p>---HOX练习---</p>
+      <p>{testHox}</p>
+      <AButton onClick={decrement}>
+        hox测试加
+      </AButton>
+      <p>---HOX练习---</p>
     </>
   )
 }

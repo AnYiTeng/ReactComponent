@@ -9,7 +9,7 @@ interface IABtn extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   classname?: string
   style?: CSSProperties
   children?: string
-  onChange?: () => void
+  onClick?: () => void
   canClick?: boolean
   types?: 'normal' | 'link'
 }
@@ -19,14 +19,14 @@ export default function AButton (props: IABtn) {
     classname,
     style, 
     children = '按钮',
-    onChange,
+    onClick,
     canClick = true,
     types = 'normal',
     ...otherProps
   } = props
 
   const clickBtn = () => {
-    onChange && onChange()
+    onClick && onClick()
   }
 
   const cls = classnames(

@@ -91,7 +91,7 @@ export default function AComment (props: IAComment) {
           <AButton
             classname="a-comment-addbutton" 
             children="Add Comment"
-            onChange={addComment}
+            onClick={addComment}
           />
         </div>
       </div>

@@ -56,9 +56,9 @@ export default function AModal (props: IAModal) {
             <div className="a-modal-body">{children}</div>
             <div className="a-modal-footer">
               {
-                hasConfirmBtn  && <AButton onChange={toConfirm} classname="modal-btn" children={confirmText}/>
+                hasConfirmBtn  && <AButton onClick={toConfirm} classname="modal-btn" children={confirmText}/>
               }
-              <AButton onChange={toCancle} classname="modal-btn" children={cancleText}/>
+              <AButton onClick={toCancle} classname="modal-btn" children={cancleText}/>
             </div>
           </div>
           <div onClick={canMaskClose ? toCancle : () => {return}} className={classnames("a-modal-mask", {'a-modal-mask-none': !visible})}></div>

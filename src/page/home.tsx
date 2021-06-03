@@ -85,7 +85,7 @@ export default function HomePage () {
         children="禁用按钮"
       />
       <AButton
-        onChange={toOpeanModal}
+        onClick={toOpeanModal}
         classname="open-btn"
         children="打开弹窗"
       />
@@ -131,7 +131,7 @@ export default function HomePage () {
       <br/>
       <AButton
         style={{marginTop: "10px"}}
-        onChange={openSuccessMessage}
+        onClick={openSuccessMessage}
         children="成功提示"
       />
       <br/>
