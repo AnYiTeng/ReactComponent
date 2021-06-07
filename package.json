@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/react-router-dom": "^5.1.7",
     "less": "^3.12.2"
   }
 }

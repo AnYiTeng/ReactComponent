@@ -86,7 +86,7 @@ export default function TestView () {
       <p>---HOX练习---</p>
       <p>{testHox}</p>
       <AButton onClick={decrement}>
-        hox测试加
+        hox测试减
       </AButton>
       <p>---HOX练习---</p>
     </>
