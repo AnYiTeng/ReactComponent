@@ -10,6 +10,7 @@ import ACollapse from '../components/collapse'
 import AComment from '../components/comment'
 import ADropdown from '../components/dropdown'
 import ACarousel from '../components/carousel'
+import Rate from '../components/rates'
 import './home.css'
 import { Link } from 'react-router-dom'
 // import { MuxMessage } from '@alife/mux-components'
@@ -176,7 +177,9 @@ export default function HomePage () {
       />
       {/* <ADropdown className="mt10" dropList={dropList}/> */}
 
-      <ACarousel />
+      <ACarousel isAutoPlay={false} />
+
+      <Rate />
     </div>
   )
 }

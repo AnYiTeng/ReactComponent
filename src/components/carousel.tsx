@@ -9,6 +9,7 @@ interface IACarouselProps {
   children?: ReactNode
   duration?: number
   currentIndex?: number
+  isAutoPlay?: boolean
 }
 
 interface IACarouselInstance {
@@ -21,8 +22,9 @@ export default function ACarousel (props: IACarouselProps) {
     className,
     style,
     children=[<img src="https://mmsite.alicdn.com/42deaf65-3c70-4281-91d1-40a9e7ac0441.jpg"/>, <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png"/>, <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png"/>],
-    duration=1000,
-    currentIndex=1
+    duration=3000,
+    currentIndex=1,
+    isAutoPlay=true
   } = props
 
   // 当前显示在第几页
@@ -73,7 +75,7 @@ export default function ACarousel (props: IACarouselProps) {
   }
 
   useEffect(() => {
-    autoPlay()
+    isAutoPlay && autoPlay()
     return () => {
       clearInterval(autoPlayIntervalRef.current)
     }
@@ -86,7 +88,7 @@ export default function ACarousel (props: IACarouselProps) {
       stop()
     }
     carouselContainer.onmouseout = function () {
-      autoPlay()
+      isAutoPlay && autoPlay()
     }
   }
 
@@ -111,7 +113,7 @@ export default function ACarousel (props: IACarouselProps) {
     },
     onDragEnd: () => {
       isDraged.current = false
-      autoPlay()
+      isAutoPlay && autoPlay()
     }
   })
 
