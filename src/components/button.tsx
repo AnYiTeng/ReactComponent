@@ -37,7 +37,7 @@ export default function AButton (props: IABtn) {
       'a-button-link': types === 'link'
     }
   )
-  const a = '100px'
+  const a = '26px'
   return (
     <>
       <button {...otherProps} style={{ ['--mine-height' as any]: a }} className={cls} onClick={clickBtn}>{children}</button>
