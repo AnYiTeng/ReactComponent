@@ -14,6 +14,8 @@ import Rate from '../components/rates'
 import './home.css'
 import { Link } from 'react-router-dom'
 // import { MuxMessage } from '@alife/mux-components'
+import ClassTest from './classTest'
+import FnTest from './fnTest'
 
 export default function HomePage () {
   const [ modalVisible, setModalVisible ] = useState(false)
@@ -180,6 +182,10 @@ export default function HomePage () {
       <ACarousel isAutoPlay={false} />
 
       <Rate />
+
+      <ClassTest />
+
+      <FnTest visible={loading} />
     </div>
   )
 }
