@@ -25,11 +25,13 @@ export default function HomePage () {
   const [ inplaceEditorValue2, setInplaceEditorValue2 ] = useState(100)
   const [ inplaceEditorValue3, setInplaceEditorValue3 ] = useState('200元')
   const [ dropList, setDropList ] = useState<DropList[]>([])
+  const [info, setInfo] = useState(0)
 
   useEffect(() => {
     setDropList([
       {value: 0, label: '选项1'},
       {value: 1, label: '选项2'},
+      {value: 3, label: '选项33'},
     ])
   }, [])
 
@@ -183,9 +185,10 @@ export default function HomePage () {
 
       <Rate />
 
-      <ClassTest />
+      <ClassTest info={info} />
 
-      <FnTest visible={loading} />
+      <FnTest info={info} />
+      <div onClick={() => setInfo(info + 1)}>父组件的info: {info}</div>
     </div>
   )
 }
