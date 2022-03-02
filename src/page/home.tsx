@@ -36,7 +36,7 @@ export default function HomePage () {
     setDropList([
       {value: 0, label: '选项1'},
       {value: 1, label: '选项2'},
-      {value: 3, label: '选项33'},
+      {value: 3, label: '选项3'},
     ])
   }, [])
 
