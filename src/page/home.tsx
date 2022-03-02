@@ -16,6 +16,10 @@ import { Link } from 'react-router-dom'
 // import { MuxMessage } from '@alife/mux-components'
 import ClassTest from './classTest'
 import FnTest from './fnTest'
+import { Button, Tabs } from 'antd'
+import 'antd/dist/antd.css'
+
+const { TabPane } = Tabs
 
 export default function HomePage () {
   const [ modalVisible, setModalVisible ] = useState(false)
@@ -26,6 +30,7 @@ export default function HomePage () {
   const [ inplaceEditorValue3, setInplaceEditorValue3 ] = useState('200元')
   const [ dropList, setDropList ] = useState<DropList[]>([])
   const [info, setInfo] = useState(0)
+  const [tabVisible, setTabVisible] = useState(false)
 
   useEffect(() => {
     setDropList([
@@ -79,9 +84,11 @@ export default function HomePage () {
 
   return (
     <div className="main">
-      <Link to="/test">
+      <Button type="primary" onClick={() => setTabVisible(!tabVisible)}>基本按钮</Button>
+      {/* <Link to="/test">
         去往测试页面
-      </Link>
+      </Link> */}
+      <a href="javascript:;" className="test-link">测试啊</a>
 
       {/* <div className="text">以铜为镜，可以正衣冠；以史为镜，可以知兴替；以人为镜，可以明得失。</div> */}
       <AButton
@@ -189,6 +196,20 @@ export default function HomePage () {
 
       <FnTest info={info} />
       <div onClick={() => setInfo(info + 1)}>父组件的info: {info}</div>
+
+      {/* <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}> */}
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="Tab 1" key="1">
+          Content of Tab Pane 1
+        </TabPane>
+        <TabPane tab="Tab 2" key="2">
+          {console.log('我是第二页')}
+          Content of Tab Pane 2
+        </TabPane>
+        <TabPane tab="Tab 3" key="3">
+          Content of Tab Pane 3
+        </TabPane>
+      </Tabs>
     </div>
   )
 }
