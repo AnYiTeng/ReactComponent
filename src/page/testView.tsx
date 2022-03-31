@@ -89,6 +89,10 @@ export default function TestView () {
         hox测试减
       </AButton>
       <p>---HOX练习---</p>
+
+      <AButton onClick={() => window.history.pushState({a: 1, b: 2}, 'null', '/listView')}>
+        按钮去往列表页面
+      </AButton>
     </>
   )
 }

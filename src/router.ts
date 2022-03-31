@@ -3,6 +3,8 @@
  */
 import HomePage from './page/home'
 import TestView from './page/testView'
+import ListView from './page/ListView'
+
 
 export default [
   {
@@ -17,5 +19,9 @@ export default [
   {
     path: '/test',
     component: TestView
-  }
+  },
+  {
+    path: '/listView',
+    component: ListView
+  },
 ]
