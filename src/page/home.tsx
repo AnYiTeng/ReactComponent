@@ -11,6 +11,7 @@ import AComment from '../components/comment'
 import ADropdown from '../components/dropdown'
 import ACarousel from '../components/carousel'
 import Rate from '../components/rates'
+import ChangeTheme from './changeTheme'
 import './home.css'
 import { Link } from 'react-router-dom'
 // import { MuxMessage } from '@alife/mux-components'
@@ -31,6 +32,7 @@ export default function HomePage () {
   const [ dropList, setDropList ] = useState<DropList[]>([])
   const [info, setInfo] = useState(0)
   const [tabVisible, setTabVisible] = useState(false)
+  const [themeChoice, setThemeChoice] = useState(true)
 
   useEffect(() => {
     setDropList([
@@ -210,6 +212,8 @@ export default function HomePage () {
           Content of Tab Pane 3
         </TabPane>
       </Tabs>
+
+      <ChangeTheme visible={themeChoice} toClose={setThemeChoice} />
     </div>
   )
 }

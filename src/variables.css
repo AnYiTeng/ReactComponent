@@ -1,5 +1,5 @@
 /*css3变量覆盖*/
-:root {
+:root[theme-color = 'blue'] {
   --app-main-caolor: #3e3eff;
   --app-brand: #3e3eff;
   --app-brand-gradient: #3e3eff;
@@ -22,6 +22,41 @@
   --btn-bg: #f3f5fc;
   --btn-text: #3e3eff;
   --btn-border-hover: #3e3eff;
+  --btn-bg-hover: #eee9ff;
+  --btn-text-hover: #333333;
+  --btn-border-radius: 4px;
+  --color-warn: #ffb400;
+  --color-red: #a40100;
+  --color-green: #51a300;
+  --color-border: #e6e6e6;
+  --font-size: 12px;
+  --line-height: 1.5;
+  --input-height: 32px;
+  --input-small-height: 26px;
+}
+:root[theme-color = 'red'] {
+  --app-main-caolor: #a40100;
+  --app-brand: #a40100;
+  --app-brand-gradient: #a40100;
+  --app-nav-bg: #303a58;
+  --app-bg: #f7f8fa;
+  --color-brand: #3e3eff;
+  --color-brand-hover: #e62828;
+  --color-brand-light: #ded4ff;
+  --color-brand-opacity: #eee9ff;
+  --color-brand-vs: #14c9ce;
+  --border-highlight: #e6e6e6;
+  --border-highlight-hover: #cccccc;
+  --btn-brand-text: #ffffff;
+  --btn-brand: #a40100;
+  --btn-brand-gradient: #a40100;
+  --btn-brand-text-hover: #ffffff;
+  --btn-brand-hover: #3080f4;
+  --btn-brand-gradient-hover: #e62828;
+  --btn-border: #a40100;
+  --btn-bg: #f3f5fc;
+  --btn-text: #a40100;
+  --btn-border-hover: #a40100;
   --btn-bg-hover: #eee9ff;
   --btn-text-hover: #333333;
   --btn-border-radius: 4px;
