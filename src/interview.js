@@ -67,7 +67,7 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 
+               * promise是
                */
               console.log(
                 'New content is available and will be used when all ' +
