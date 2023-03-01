@@ -73,7 +73,13 @@
           5.客户端根据返回数据进行页面渲染
           6.四次挥手断开连接
         </div>
-      <li>7.http1.x问题及2.0优化</li>
+      <li>7.DNS解析过程</li>
+        <div>
+          1.浏览器输入url后，操作系统会先检查本地的host文件是否有该url的映射关系，有的话使用该ip地址映射
+          2.没有的话客户端会向本地DNS服务器发起查询，如果在本地配置区域资源中，就返回
+          3.如果都不存在，则递归的查询根域名服务器、一级域名服务器、二级域名服务器，直至查询到对应的ip地址
+        </div>
+      <li>8.http1.x问题及2.0优化</li>
         <div>
           http1.x问题：
           1.队头阻塞问题：Chrome 有个机制，对于同一域名，默认允许同时建立6个tcp链接，但同时只能处理一个请求，在
@@ -87,28 +93,28 @@
           2.header压缩：使用http专门的头部压缩算法hpack算法，就是客户端和服务端各自维护一份索引表，用索引号表示
           重复的字符串，来实现头部压缩
         </div>
-      <li>8.babel编译流程</li>
+      <li>9.babel编译流程</li>
         <div>
           1.parse: 通过parse将目标代码转化为ast抽象语法书
           2.transform: 调用ast插件对ast进行增删改
           3.generate: 根据修改后的ast生成最终的目标代码
         </div>
-      <li>9.什么是纯函数</li>
+      <li>10.什么是纯函数</li>
         <div>
           纯函数：固定的输入只有唯一的输出，并且不会产生副作用。
           副作用：函数在完成指定任务时同时读取并使用了外部数据尤其是对外部数据进行了修改，导致系统环境发生变化
         </div>
-      <li>10.git hook</li>
+      <li>11.git hook</li>
         <div>
           执行git操作时的事件节点，pre-commit、commit-msg、pre-push
           hask就是封装了git hook
         </div>
-      <li>11.fetch ajax axios 关系</li>
+      <li>12.fetch ajax axios 关系</li>
         <div>
           ajax是异步请求的统称，不代指某一项技术，axios和fetch都是基于promise封装的ajax请求工具，只不过fetch是
           原生的，axios是封装的xhr的第三方库
         </div>
-      <li>12.webpack 打包流程</li>
+      <li>13.webpack 打包流程</li>
         <div>
           1.读取入口文件
           2.根据入口文件递归读取依赖的内容
@@ -116,14 +122,14 @@
           loader: loader是一个函数，这个函数会在我们解析一些文件时执行
           plugin: plugin是对webpack功能的扩充，会在webpack打包的某一节点做一些操作
         </div>
-      <li>13.TCP UDP 理解</li>
+      <li>14.TCP UDP 理解</li>
         <div>
           1.tcp是基于链接的协议，通信前必须建立可靠的链接；udp是无连接协议
           2.tcp提供交付保证，传输过程丢失将会重发；udp传输过程可能会丢包
           3.tcp提供顺序保证，即使到达客户端顺序不一致，tcp也会进行排序；udp不提供有序性保证
           4.tcp速度慢；udp速度快，udp用于直播在线通话
         </div>
-      <li>14.软件设计理解</li>
+      <li>15.软件设计理解</li>
         <div>
           1.可读性：软件设计文档通俗易懂，便于他人理解
           2.可维护性：设计便于维护
@@ -131,13 +137,13 @@
           4.可扩展性：通过添加功能可以实现其他需求
           所有的软件设计都是为了提高研发效率和降低维护成本为目的的
         </div>
-      <li>15.设计模式</li>
+      <li>16.设计模式</li>
         <div>
           1.建造者模式：一个复杂的对象可以拆分为多个简单的组件，最后构成该复杂对象
           2.工厂模式：方便处理类似的需求
           3.发布订阅/观察者模式：多个观察者监听一个目标对象，该目标对象发生变化后通知观察者列表自动更新
         </div>
-      <li>16.JSON.parse(JSON.stringify())深拷贝有什么问题</li>
+      <li>17.JSON.parse(JSON.stringify())深拷贝有什么问题</li>
         <div>
           1.被拷贝对象如果有时间对象，会被转化为字符串
           2.~如果有正则或者error会被转化为空对象
@@ -145,14 +151,14 @@
           4.~如果有NaN或infinity会被转化为null
           5.~如果存在循环引用将不会被拷贝
         </div>
-      <li>17.观察者和发布订阅区别</li>
+      <li>18.观察者和发布订阅区别</li>
         <div>
           观察者模式：观察者模式有两个主体，目标对象和观察者，他们是一对多的关系，当目标对象发生变化后，
           会通知观察者列表调用 upload 方法更新，实现自己的业务逻辑
           发布订阅：发布订阅模式有发布者、订阅者、第三方组件信息中介，发布者和订阅者并不会直接通信，需要
           通过信息中介去处理信息交流，所以在发布订阅模式中，组件是松散耦合的
         </div>
-      <li>18.什么是闭包？闭包的作用？闭包的注意点？</li>
+      <li>19.什么是闭包？闭包的作用？闭包的注意点？</li>
         <div>
           定义：函数定义和函数表达式位于另一个函数的函数体内，并且这些内部函数可以
           访问他们所在的外部函数中声明的所有局部变量、参数和声明的其他内部函数。
@@ -161,8 +167,8 @@
           注意点：由于闭包会使得函数中的变量都保存在内存中，内存消耗很大，所以不能滥用闭包，
           否则会造成网页的性能问题。在退出函数之前，将不使用的局部变量全部删除
         </div>
-      <li>19.前端性能优化</li>
-      <li>20.npm run dev 时做了什么</li>
+      <li>20.前端性能优化</li>
+      <li>21.npm run dev 时做了什么</li>
         <div>
           1.首先会去项目中的 package.json 文件中找 script 对应的 dev，然后
           执行 dev 的命令
@@ -174,7 +180,7 @@
           4.软链是怎么来的呢？npm install 时，npm 就帮我们把这种软链接配置好了，其实这种软链接
           就相当于一种映射，执行 package.json 命令时，就到 .bin 找映射文件，然后执行对应脚本。
         </div>
-      <li>21.cookie、sessionStorage、localStorage区别</li>
+      <li>22.cookie、sessionStorage、localStorage区别</li>
         <div>
           共同点：都存储在浏览器本地
           不同点：
@@ -185,7 +191,7 @@
             4.cookie 一般用于存储登录验证信息；localStorage 用于存储不易变动的信息，减轻服务端压力；sessionStorage 可以
             检测用户是否刷新进入页面
         </div>
-      <li>22.commonJS和ESModule区别</li>
+      <li>23.commonJS和ESModule区别</li>
         <div>
           1.commonJS是同步加载模块，ESM是异步加载模块
           2.commonJS输出的是一个值拷贝，即模块内部变化不会影响外部，ESM输出的是只读值引用
@@ -193,11 +199,11 @@
             commonJS加载的是一个对象，即module.export属性，该对象只有在脚本运行完才会生成
             ESM不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
         </div>
-      <li>23.为什么虚拟Dom可以提高性能</li>
+      <li>24.为什么虚拟Dom可以提高性能</li>
         <div>
           虚拟dom相当于在js和真实dom之间加了一个缓存，利用dom diff 算法避免了没有必要的dom操作，从而提高性能
         </div>
-      <li>24.Promise 是什么以及常用的方法</li>
+      <li>25.Promise 是什么以及常用的方法</li>
         <div>
           Promise 是用来创建promise对象的构造函数，一个promise对象用来表示一个异步操作的最终状态，以及该异步操作的结果值，
           这个结果值在promise对象创建时是未知的，它允许你为异步操作的成功和失败分别绑定相应的处理回调函数，让异步方法可以像同
@@ -207,6 +213,53 @@
           2.all 接收一个promise数组，所有promise都成功才会执行成功回调，有一个失败就抛出第一个错误信息
           3.any 接收promise数组，有一个执行通过，则认为成功，否则失败
           4.race 接收promise数组，第一个执行完毕的是通过则认为成功，否则失败
+        </div>
+      <li>26.http状态码</li>
+        <div>
+          200: 成功
+          301: 永久重定向
+          302: 暂时重定向
+          304: 使用缓存资源
+          401: 身份验证不通过
+          403: 无权限
+          404: 资源不存在
+          500: 服务器错误，语法或配置错误
+          502: 网关或代理服务器接收上游响应是无效的
+          503: 服务器停机，没有处于接收状态
+        </div>
+      <li>27.数组、对象常用方法</li>
+        <div>
+          数组：
+            filter、map、some、every、forEach等等，主要答出 reduce
+            reduce: 为数组提供累加器，array.reduce(function(total, currentValue), initialValue)
+              total: 初始值或上一次回调返回的值
+              currenValue: 数组当前元素值
+              initialValue: 初始值
+              1.如果 initialValue 在调用 reduce 时被提供，那么第一个 total 将等于 initialValue，此时 currentValue 等于数组中
+                的第一个值；
+              2.如果 initialValue 未被提供，那么 total 等于数组中的第一个值，currentValue 等于数组中的第二个值。此时如果数组为空，
+                那么将抛出 TypeError。
+              3.如果数组仅有一个元素，并且没有提供 initialValue，或提供了 initialValue 但数组为空，那么回调不会被执行，数组的唯一值
+                将被返回。
+          对象：
+            Object.keys() 返回键组成的数组
+            Object.entries 返回对象自身键值对组成的二维数组[[key1, value1], [key2, value2]]
+            Object.defineProperty(obj, props, description) 实现双向绑定，对标Proxy
+              obj: 目标对象
+              props: 修改或新增的属性
+              description: 对该属性的描述
+                get: 获取该属性时回调
+                set: 修改该属性时回调
+                value: 需要设置的value值
+                writable: 该属性是否可被修改
+                configurable: 是否可以更改除了value和writable之外的其他属性
+                enumerable: 该属性是否可枚举
+        </div>
+      <li>28.for in 和 for of 区别</li>
+        <div>
+          1.for in可以遍历数组或对象；for of不能遍历对象
+          2.for in遍历数组获取其下标；for of遍历数组获取其值
+          3.for in遍历对象获取其key
         </div>
     </ul>
   </div>

@@ -67,7 +67,14 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * promise是
+               * Promise是创建promise对象的构造函数，promise对象表示一个异步函数的最终状态及该异步函数的最终结果值，
+               * 这个值在promise对象创建时是未知的，它允许你为这个异步函数绑定成功的回调和失败的回调，可以让异步函数像
+               * 同步方法那样被返回
+               * 
+               * 1.finally: 无论成功失败都会执行的回调
+               * 2.any: 只要有一个成功的都会返回成功，所有的都失败才会返回失败
+               * 3.all: 所有的都返回成功才会返回成功，有一个失败就会返回失败，返回第一个失败的结果值
+               * 4.rece: 第一个promise返回的结果，无论成功失败
                */
               console.log(
                 'New content is available and will be used when all ' +
