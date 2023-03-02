@@ -201,7 +201,9 @@
         </div>
       <li>24.为什么虚拟Dom可以提高性能</li>
         <div>
-          虚拟dom相当于在js和真实dom之间加了一个缓存，利用dom diff 算法避免了没有必要的dom操作，从而提高性能
+          如果JS代码频繁的操作DOM，不使用虚拟DOM，JS引擎会与DOM引擎频繁切换，重新计算布局绘制图像会引起更大的性能消耗
+          1.虚拟DOM不会立马进行排版与重绘操作
+          2.虚拟DOM会通过dom diff算法减少不必要的DOM操作，减少过多DOM节点排版重绘损耗
         </div>
       <li>25.Promise 是什么以及常用的方法</li>
         <div>
@@ -243,7 +245,8 @@
                 将被返回。
           对象：
             Object.keys() 返回键组成的数组
-            Object.entries 返回对象自身键值对组成的二维数组[[key1, value1], [key2, value2]]
+            Object.entries() 返回对象自身键值对组成的二维数组[[key1, value1], [key2, value2]]
+            Object.assign() 合并多个对象
             Object.defineProperty(obj, props, description) 实现双向绑定，对标Proxy
               obj: 目标对象
               props: 修改或新增的属性
