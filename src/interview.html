@@ -264,7 +264,34 @@
           2.for in遍历数组获取其下标；for of遍历数组获取其值
           3.for in遍历对象获取其key
         </div>
+      <li>29.计算机7层模型</li>
+        <div>
+          应用层（http、ftp等）
+          表示层
+          会话层
+          传输层
+          网络层
+          数据链路层
+          物理层
+        </div>
     </ul>
   </div>
 </body>
+
+<script>
+    // 获取hash参数
+    getHashSearchParam(key) {
+      const url = location.href
+      // 获取 hash 值，不包含 '#' 号
+      const hash = url.substring(url.indexOf("#") + 1)
+      // 查找 '?' 号所在的索引
+      const searchIndex = hash.indexOf("?")
+      // '?' 号后面接的是索引参数，如果找到则+1，去除'?' 号
+      const search = searchIndex !== -1 ? hash.substring(searchIndex + 1) : ""
+      // 把搜索参数字符串提过URLSearchParams转成对象形式
+      const usp = new URLSearchParams(search)
+      // 通过URLSearchParams自带的get方法，查询键所对应的值
+      return usp.get(key)
+    }
+</script>
 </html>

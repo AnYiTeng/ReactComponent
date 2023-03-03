@@ -67,7 +67,9 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 
+               * 1.for in和for of都可以遍历数组
+               * 2.for in遍历数组获取其下标,for of获取其值
+               * 3.for in可以遍历对象，获取其key，for of 不能遍历对象
                */
               console.log(
                 'New content is available and will be used when all ' +
