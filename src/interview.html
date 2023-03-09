@@ -220,7 +220,7 @@
           1.finally 无论成功失败都会执行的回调
           2.all 接收一个promise数组，所有promise都成功才会执行成功回调，有一个失败就抛出第一个错误信息
           3.any 接收promise数组，有一个执行通过，则认为成功，否则失败
-          4.race 接收promise数组，第一个执行完毕的是通过则认为成功，否则失败
+          4.race 接收promise数组，返回第一个执行完毕的promise对象的结果，无论成功或失败
         </div>
       <li>27.http状态码</li>
         <div>
@@ -257,12 +257,12 @@
               obj: 目标对象
               props: 修改或新增的属性
               description: 对该属性的描述
-                get: 获取该属性时回调
-                set: 修改该属性时回调
                 value: 需要设置的value值
                 writable: 该属性是否可被修改
-                configurable: 是否可以更改除了value和writable之外的其他属性
                 enumerable: 该属性是否可枚举
+                get: 获取该属性时回调
+                set: 修改该属性时回调
+                configurable: 是否可以更改除了value和writable之外的其他属性
         </div>
       <li>29.for in 和 for of 区别</li>
         <div>
@@ -308,7 +308,7 @@
             源码通常包含一些需要被转换的非js文件，并不是所有源码都需要同时被加载，vite以ESM方式提供源码，让浏览器接管了打包程序的部分工作，
             vite只需要在浏览器请求源码时进行转换并按需提供源码。
           2.热更新：
-            在vite中，HMR是在原生ESM上执行的，当编辑一个文件时，vite只需要精确的使已编辑的模块与其最近的HMR边间之间的链失活，使得
+            在vite中，HMR是在原生ESM上执行的，当编辑一个文件时，vite只需要精确的使已编辑的模块与其最近的HMR边界之间的链失活，使得
             无论应用大小如何，HMR始终能保持快速更新。
             vite利用http头来加速整个页面重新加载，源码模块会使用304进行协商缓存；依赖模块会通过cache-control: max-age进行强缓存。
         </div> 
