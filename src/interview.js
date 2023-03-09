@@ -67,7 +67,9 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 应用层、表示层、会话层、传输层、网络层、数据链路层、物理层
+               * 函数和函数表达式位于另一个函数的函数体内，并且这个内部函数可以使用外部函数的参数局部变量和其它函数定义，
+               * 当这样一个内部函数在他所在的外部函数之外被调用时，就会形成闭包，闭包可以将函数内部局部变量存储在内存中，
+               * 延长函数内变量使用生命周期，滥用闭包会导致内存溢出
                */
               console.log(
                 'New content is available and will be used when all ' +
