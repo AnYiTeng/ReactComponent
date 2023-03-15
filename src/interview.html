@@ -204,6 +204,7 @@
           3.commonJS是运行时加载，ESM是编译时输出接口
             commonJS加载的是一个对象，即module.export属性，该对象只有在脚本运行完才会生成
             ESM不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
+          4.commonJs不会提升require，ESModule在编译期间会将所有import提升到顶部
         </div>
       <li>25.为什么虚拟Dom可以提高性能</li>
         <div>
