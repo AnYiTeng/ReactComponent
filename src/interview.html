@@ -54,7 +54,7 @@
             3.Action：state的变化会导致view的变化，用户接触不到state，只能接触到view，所以state的变化必须是由view导致的，action就是
               view发出的通知，表示state应该要发生变化了
             4.Reducer：store收到action后，必须给出一个新的state，这样view才会发生变化，这种state的计算过程就叫做reducer。reducer是
-              一个函数，它接收action和当前state为参数，返回一个新的state
+              一个纯函数，它接收action和当前state为参数，返回一个新的state
             5.dispatch：是view发出Action的唯一方法
           流程：
             1.用户在view通过dispatch发出action

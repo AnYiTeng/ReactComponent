@@ -67,11 +67,9 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * vite将项目分为源码和依赖，依赖多为不会变动的js文件，vite使用esbuild对依赖进行预构建，esbuild使用go语言编写，
-               * 比js编写的构建工具快10到100倍，源码vite使用esm方式提供给浏览器，并且源码不会一次性全部加载，浏览器需要的源码
-               * 部分，vite转换后提供给浏览器，让浏览器分担部分打包任务
-               * 
-               * vite的热更新，会使更新的模块与最近的hmr模块失活，可以快速响应热更新，vite使用http的强缓存加载没有变动的资源
+               * 浏览器输入url，操作系统去本地host文件查看该url对应的ip映射，有的话就使用该ip映射，没有的话去本地
+               * dns服务器查看是否有对该ulr的ip缓存，有的话使用，否则本地dns服务器依次去根域名服务器、一级域名服务器
+               * 二级域名服务器查询，知道找到该url的映射ip
                */
               console.log(
                 'New content is available and will be used when all ' +
