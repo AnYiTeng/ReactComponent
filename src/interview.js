@@ -67,9 +67,11 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 浏览器输入url，操作系统去本地host文件查看该url对应的ip映射，有的话就使用该ip映射，没有的话去本地
-               * dns服务器查看是否有对该ulr的ip缓存，有的话使用，否则本地dns服务器依次去根域名服务器、一级域名服务器
-               * 二级域名服务器查询，知道找到该url的映射ip
+               * js的本质就是操作dom，如果两个js事件操作的是同一个dom就会产生冲突，所以js是单线程的，为了处理优先级
+               * 更高的任务，js又分为宏任务和微任务，所有的同步任务都在主线程上执行，当主线程上的任务执行完毕就去微任务
+               * 队列查看是否有微任务，有的话就去执行，当执行微任务过程中又遇到了其他微任务，就塞入到微任务队列末尾等待
+               * 执行，当所有的微任务都执行完毕，就去宏任务队列查看宏任务是否为空，不为空就取出最先进入宏任务队列的任务
+               * 去执行。
                */
               console.log(
                 'New content is available and will be used when all ' +

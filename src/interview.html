@@ -212,7 +212,12 @@
           1.虚拟DOM不会立马进行排版与重绘操作
           2.虚拟DOM会通过dom diff算法减少不必要的DOM操作，减少过多DOM节点排版重绘损耗
         </div>
-      <li>26.Promise 是什么以及常用的方法</li>
+      <li>26.什么是DOM Diff算法</li>
+        <div>
+          DOM Diff算法会先将新旧虚拟DOM树进行逐层比较，并记录下差异，然后根据这些差异去更新DOM节点，最终得到与新虚拟DOM树
+          相匹配的真实DOM树。
+        </div>
+      <li>27.Promise 是什么以及常用的方法</li>
         <div>
           Promise 是用来创建promise对象的构造函数，一个promise对象用来表示一个异步操作的最终状态，以及该异步操作的结果值，
           这个结果值在promise对象创建时是未知的，它允许你为异步操作的成功和失败分别绑定相应的处理回调函数，让异步方法可以像同
@@ -223,7 +228,7 @@
           3.any 接收promise数组，有一个执行通过，则认为成功，否则失败
           4.race 接收promise数组，返回第一个执行完毕的promise对象的结果，无论成功或失败
         </div>
-      <li>27.http状态码</li>
+      <li>28.http状态码</li>
         <div>
           200: 成功
           301: 永久重定向
@@ -237,7 +242,7 @@
           503: 服务器停机，没有处于接收状态
           504: 服务器响应超时
         </div>
-      <li>28.数组、对象常用方法</li>
+      <li>29.数组、对象常用方法</li>
         <div>
           数组：
             filter、map、some、every、forEach等等，主要答出 reduce
@@ -266,13 +271,13 @@
                 set: 修改该属性时回调
                 configurable: 是否可以更改除了value和writable之外的其他属性
         </div>
-      <li>29.for in 和 for of 区别</li>
+      <li>30.for in 和 for of 区别</li>
         <div>
           1.for in可以遍历数组或对象；for of不能遍历对象
           2.for in遍历数组获取其下标；for of遍历数组获取其值
           3.for in遍历对象获取其key
         </div>
-      <li>30.计算机7层模型</li>
+      <li>31.计算机7层模型</li>
         <div>
           应用层（http、ftp等）
           表示层
@@ -282,7 +287,7 @@
           数据链路层
           物理层
         </div>
-      <li>31.ts常用的内置工具类型</li>
+      <li>32.ts常用的内置工具类型</li>
         <div>
           1.Omit: 剔除已定义对象中不需要的一部分形成新的类型。type NewObj = Omit<Obj, "obj属性1", ""obj属性2">
           2.Pick: 选择已定义对象中自己需要的一部分形成新的类型。type NewObj = Pick<Obj, "obj属性1", ""obj属性2">
@@ -293,17 +298,17 @@
           7.Extract: 与Exclude相反，排除不同的，留下相同的。
           8.Record: Record<K,T> 构造具有给定类型T的一组属性K的类型（定义对象类型）。
         </div>
-      <li>32.ts interface和type的区别</li>
+      <li>33.ts interface和type的区别</li>
         <div>
           1.type可以用来定义基本类型、对象类型、数组类型、函数类型等；interface只可以定义对象类型和函数类型
           2.type不能重复声明；interface可以重复声明，ts会默认进行声明合并
         </div>
-      <li>33.js如何开启多线程</li>
+      <li>34.js如何开启多线程</li>
         <div>
           Web Work是h5提供的js解决多线程的方案，将一些大量计算任务放到Web Worker运行而不冻结用户界面。
           语法：new Worker()
         </div>
-      <li>34.vite为什么比webpack快</li>
+      <li>35.vite为什么比webpack快</li>
         <div>
           1.服务器启动：vite一开始将应用中的模块区分为依赖和源码两类。
             依赖大多为开发时不会变动的js，vite使用esuild预构建依赖，esbuild使用go编写，预构建依赖比js编写的打包器快10-100倍。
@@ -314,7 +319,7 @@
             无论应用大小如何，HMR始终能保持快速更新。
             vite利用http头来加速整个页面重新加载，源码模块会使用304进行协商缓存；依赖模块会通过cache-control: max-age进行强缓存。
         </div> 
-      <li>35.什么是慢启动</li>
+      <li>36.什么是慢启动</li>
         <div>
           慢启动是一种拥塞速率算法，用于在TCP/IP网络中调节数据包的发送速率，慢启动算法会在一开始时将传输速率设置为一个较低的值，
           然后逐渐增加，直到网络拥塞或达到最大带宽，这时慢启动又会逐渐降低发送速率，避免网络阻塞丢包，慢启动算法可以让发送方逐渐
