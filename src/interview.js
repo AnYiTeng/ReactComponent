@@ -67,11 +67,9 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * js的本质就是操作dom，如果两个js事件操作的是同一个dom就会产生冲突，所以js是单线程的，为了处理优先级
-               * 更高的任务，js又分为宏任务和微任务，所有的同步任务都在主线程上执行，当主线程上的任务执行完毕就去微任务
-               * 队列查看是否有微任务，有的话就去执行，当执行微任务过程中又遇到了其他微任务，就塞入到微任务队列末尾等待
-               * 执行，当所有的微任务都执行完毕，就去宏任务队列查看宏任务是否为空，不为空就取出最先进入宏任务队列的任务
-               * 去执行。
+               * type和interface都可以用来定义对象和函数的类型，type还可以定义基本数据类型和数组类型等
+               * type不可以重复进行声明
+               * interface可以重复进行声明，会进行声明合并
                */
               console.log(
                 'New content is available and will be used when all ' +
