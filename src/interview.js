@@ -67,9 +67,9 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * type和interface都可以用来定义对象和函数的类型，type还可以定义基本数据类型和数组类型等
-               * type不可以重复进行声明
-               * interface可以重复进行声明，会进行声明合并
+               * 慢启动是拥塞速率算法，在tcp/ip网络中进行数据传输时，一开始是以很低的速率进行数据传输，然后慢慢增大，
+               * 直到出现拥塞现象或达到最大带宽时，再慢慢降低，让发送方可以以实际网络情况在不丢失数据的前提下以最大速率
+               * 进行数据传输
                */
               console.log(
                 'New content is available and will be used when all ' +
