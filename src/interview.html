@@ -411,5 +411,25 @@
     //（最后让左边+中间+右边拼接成最后的结果）
     return quickSort(leftArr).concat(middleValue, quickSort(rightArr))
   }
+  // 深克隆
+  function deepCopy(data, map = new WeakMap()) {
+    if (typeof data === 'object') {
+      let newData = data instanceof Array ? [] : {}
+      if (map.get(data)) {
+        return map.get(data)
+      }
+      map.set(data, newData)
+      for (let i in data) {
+        if (data[i] instanceof Object || data[i] instanceof Array) {
+          newData[i] = deepCopy(data[i], map)
+        } else {
+          newData[i] = data[i]
+        }
+      }
+      return newData
+    } else {
+      return data
+    }
+  }
 </script>
 </html>
