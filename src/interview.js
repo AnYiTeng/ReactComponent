@@ -67,13 +67,10 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * Omit: 剔除已有目标类型不需要的一部分属性组成新的类型
-               * Pick: 选择已有目标类型的一部分属性组成新的类型
-               * Partial: 将目标类型属性变为可选
-               * Required: 将目标类型属性变为必选
-               * Reqdonly: 将目标类型属性变为只读
-               * Exclude: 将两个目标类型的交集属性之外的属性组成一个新的类型
-               * Extral: 将两个目标类型的交集属性变为一个新的类型
+               * react使用单链表来管理hook，所有的hook都依次按顺序存放在链表节点中，每个hook都有mount和update两个阶段，
+               * mount阶段用于初始化状态，update阶段是更新状态的阶段，如果在mount阶段初始化了abc三个状态，将b放在条件判断
+               * 语句中，当执行update阶段时，收集链表中的所有更新Hook，由于b是在条件判断语句中，没有收集到b的update，就会导
+               * 致链表更新错位，react就会报错
                */
               function quickSort(arr) {
                 let len = arr.length
