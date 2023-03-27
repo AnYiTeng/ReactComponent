@@ -7,7 +7,14 @@
   <title>Document</title>
 </head>
 <body>
+  实用技巧：
   <div>
+    1.TS NonNullable 可以过滤掉可能为null和undefined的情况，Array[number]取得是数组类型的任意一项类型
+      type ISubmitReplay = Array<NonNullable<IModels['POST/wtsy/livecourse/cutReplayVideo.json']['Req']['query']['replayVideoCutList']>[number] & { originUrl?: string }>
+  </div>
+
+  <div>
+    面试题
     <ul>
       <li>1.Event Loop</li>
         <div>

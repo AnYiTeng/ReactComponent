@@ -67,15 +67,31 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 慢启动是拥塞速率算法，在tcp/ip网络中进行数据传输时，一开始是以很低的速率进行数据传输，然后慢慢增大，
-               * 直到出现拥塞现象或达到最大带宽时，再慢慢降低，让发送方可以以实际网络情况在不丢失数据的前提下以最大速率
-               * 进行数据传输
+               * Omit: 剔除已有目标类型不需要的一部分属性组成新的类型
+               * Pick: 选择已有目标类型的一部分属性组成新的类型
+               * Partial: 将目标类型属性变为可选
+               * Required: 将目标类型属性变为必选
+               * Reqdonly: 将目标类型属性变为只读
+               * Exclude: 将两个目标类型的交集属性之外的属性组成一个新的类型
+               * Extral: 将两个目标类型的交集属性变为一个新的类型
                */
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
-              );
-
+              function quickSort(arr) {
+                let len = arr.length
+                let middleIndex = Math.floor(len / 2)
+                let middleValue = arr.split(arr[middleIndex], 1)[0]
+                let lefArr = []
+                let rightArr = []
+                for (let i=0; i<len; i++) {
+                  if (arr[i] < middleValue) {
+                    lefArr.push(arr[i])
+                  } else {
+                    rightArr.push(arr[i])
+                  }
+                  return quickSort(lefArr).concat(middleValue, quickSort(rightArr))
+                }
+              }
+              quickSort()
+              
               // Execute callback
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
