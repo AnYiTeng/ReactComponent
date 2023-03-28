@@ -45,9 +45,6 @@ export const getHashSearchParam = (key: any) => {
 }
 
 /**
- * 枚举根据value获取key
- */
-/**
  * 根据枚举key获取value
  */
 type EnumKey<T extends object, _U> = keyof { [K in keyof T]: K }
