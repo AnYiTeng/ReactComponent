@@ -67,10 +67,9 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * react使用单链表来管理hook，所有的hook都依次按顺序存放在链表节点中，每个hook都有mount和update两个阶段，
-               * mount阶段用于初始化状态，update阶段是更新状态的阶段，如果在mount阶段初始化了abc三个状态，将b放在条件判断
-               * 语句中，当执行update阶段时，收集链表中的所有更新Hook，由于b是在条件判断语句中，没有收集到b的update，就会导
-               * 致链表更新错位，react就会报错
+               * 1.语法不同：React使用jsx语法，将js和html结合的语法；Vue使用单文件组件形式，将html、css、js都放在一个文件中
+               * 2.react是单向数据流，vue是双向数据绑定
+               * 3.React 的dom diff算法是自顶向下所有节点都会被比较更新；vue会只更新修改的组件部分
                */
               function quickSort(arr) {
                 let len = arr.length

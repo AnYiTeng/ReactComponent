@@ -205,7 +205,6 @@ export default function HomePage () {
           Content of Tab Pane 1
         </TabPane>
         <TabPane tab="Tab 2" key="2">
-          {console.log('我是第二页')}
           Content of Tab Pane 2
         </TabPane>
         <TabPane tab="Tab 3" key="3">
