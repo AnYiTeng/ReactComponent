@@ -43,3 +43,20 @@ export const getHashSearchParam = (key: any) => {
   // 通过URLSearchParams自带的get方法，查询键所对应的值
   return usp.get(key)
 }
+
+/**
+ * 枚举根据value获取key
+ */
+/**
+ * 根据枚举key获取value
+ */
+type EnumKey<T extends object, _U> = keyof { [K in keyof T]: K }
+export function getKeyByValue<T extends object, U extends T[keyof T]>(obj: T, value: U): EnumKey<T, U> | undefined {
+  const keys = Object.keys(obj) as Array<keyof T>
+  for (const key of keys) {
+    if (obj[key] === value) {
+      return key
+    }
+  }
+  return undefined
+}
