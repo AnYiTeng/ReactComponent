@@ -67,17 +67,7 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 200: 成功
-               * 301: 永久重定向
-               * 302: 暂时重定向
-               * 304: 缓存资源返回
-               * 401: 身份验证不通过
-               * 403: 无权限
-               * 404: 资源不存在
-               * 500: 服务器内部代码或配置错误
-               * 502: 网关或代理服务器接收到的上游服务信息错误
-               * 503: 服务器没有处于可接受状态，一般是停机维护
-               * 504: 服务器响应超时
+               * 过度使用context，会造成组件过于复杂，耦合度变高，变得难以维护
                */
               
               
