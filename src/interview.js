@@ -67,26 +67,19 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 1.语法不同：React使用jsx语法，将js和html结合的语法；Vue使用单文件组件形式，将html、css、js都放在一个文件中
-               * 2.react是单向数据流，vue是双向数据绑定
-               * 3.React 的dom diff算法是自顶向下所有节点都会被比较更新；vue会只更新修改的组件部分
+               * 200: 成功
+               * 301: 永久重定向
+               * 302: 暂时重定向
+               * 304: 缓存资源返回
+               * 401: 身份验证不通过
+               * 403: 无权限
+               * 404: 资源不存在
+               * 500: 服务器内部代码或配置错误
+               * 502: 网关或代理服务器接收到的上游服务信息错误
+               * 503: 服务器没有处于可接受状态，一般是停机维护
+               * 504: 服务器响应超时
                */
-              function quickSort(arr) {
-                let len = arr.length
-                let middleIndex = Math.floor(len / 2)
-                let middleValue = arr.split(arr[middleIndex], 1)[0]
-                let lefArr = []
-                let rightArr = []
-                for (let i=0; i<len; i++) {
-                  if (arr[i] < middleValue) {
-                    lefArr.push(arr[i])
-                  } else {
-                    rightArr.push(arr[i])
-                  }
-                  return quickSort(lefArr).concat(middleValue, quickSort(rightArr))
-                }
-              }
-              quickSort()
+              
               
               // Execute callback
               if (config && config.onUpdate) {
