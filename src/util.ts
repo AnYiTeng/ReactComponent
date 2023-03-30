@@ -167,3 +167,31 @@ export function timeToSecond(time: string) {
     return 0
   }
 }
+
+/**
+ * 判断数组是否完全包含另一个数组
+ * @param arr1 子数组
+ * @param arr2 父数组
+ * @returns 布尔值
+ */
+export const arrayEveryIncludes = (arr1: any[], arr2: any[]) => {
+  return arr1.every(val => arr2.includes(val))
+}
+
+/**
+ * 判断数组是否只包含另一个数组其中几项
+ * @param arr1 子数组
+ * @param arr2 父数组
+ * @returns 布尔值
+ */
+export const arraySomeIncludes = (arr1: any[], arr2: any[]) => {
+  return arr1.some(val => arr2.includes(val))
+}
+
+/**
+ * 获取 Enum 中 value 中相同的 label
+ */
+export function getEnumLabel(enumData: Record<any, any>, key?: string | number) {
+  const current = Object.entries(enumData).find(([, value]) => value === key)
+  return current?.[0]
+}
