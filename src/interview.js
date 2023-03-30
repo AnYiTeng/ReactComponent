@@ -67,7 +67,12 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 过度使用context，会造成组件过于复杂，耦合度变高，变得难以维护
+               * 1.队头阻塞问题：chrome允许同域名下请求同时建立6个tcp链接，但每次只能处理一个请求，当前请求没有返回，其余请求
+               * 都处于阻塞状态
+               * 2.头部体积过大：由于http是无状态的，导致每次请求都需要携带上大量的身份验证信息，这些信息都是重复的，造成请求头
+               * 冗余信息过多，头部体积变大
+               * 
+               * 
                */
               
               
