@@ -67,14 +67,18 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 1.队头阻塞问题：chrome允许同域名下请求同时建立6个tcp链接，但每次只能处理一个请求，当前请求没有返回，其余请求
-               * 都处于阻塞状态
-               * 2.头部体积过大：由于http是无状态的，导致每次请求都需要携带上大量的身份验证信息，这些信息都是重复的，造成请求头
-               * 冗余信息过多，头部体积变大
-               * 
-               * 
+               * 慢启动是拥塞速率算法，在tp/ip网络中一开始进行数据传输时，以很小的速率进行传输数据，然后慢慢增大，直到产生拥塞的情况
+               * 或达到网络最大带宽，然后再慢慢降低，慢启动可以让发送方以实际网络情况在不丢包的前提下以最大速率进行数据传输
                */
               
+              function insertSort(arr) {
+                let len = arr.len
+                for (let i=1; i<len; i++) {
+                  for (let j=i; j>0; j--) {
+                    
+                  }
+                }
+              }
               
               // Execute callback
               if (config && config.onUpdate) {
