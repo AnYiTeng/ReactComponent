@@ -17,10 +17,10 @@ import { Link } from 'react-router-dom'
 // import { MuxMessage } from '@alife/mux-components'
 import ClassTest from './classTest'
 import FnTest from './fnTest'
-import { Button, Tabs } from 'antd'
-import 'antd/dist/antd.css'
+// import { Button, Tabs } from 'antd'
+// import 'antd/dist/antd.css'
 
-const { TabPane } = Tabs
+// const { TabPane } = Tabs
 
 export default function HomePage () {
   const [ modalVisible, setModalVisible ] = useState(false)
@@ -86,7 +86,7 @@ export default function HomePage () {
 
   return (
     <div className="main">
-      <Button type="primary" onClick={() => setTabVisible(!tabVisible)}>基本按钮</Button>
+      {/* <Button type="primary" onClick={() => setTabVisible(!tabVisible)}>基本按钮</Button> */}
       {/* <Link to="/test">
         去往测试页面
       </Link> */}
@@ -200,7 +200,7 @@ export default function HomePage () {
       <div onClick={() => setInfo(info + 1)}>父组件的info: {info}</div>
 
       {/* <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}> */}
-      <Tabs defaultActiveKey="1">
+      {/* <Tabs defaultActiveKey="1">
         <TabPane tab="Tab 1" key="1">
           Content of Tab Pane 1
         </TabPane>
@@ -210,7 +210,7 @@ export default function HomePage () {
         <TabPane tab="Tab 3" key="3">
           Content of Tab Pane 3
         </TabPane>
-      </Tabs>
+      </Tabs> */}
 
       <ChangeTheme visible={themeChoice} toClose={setThemeChoice} />
     </div>
