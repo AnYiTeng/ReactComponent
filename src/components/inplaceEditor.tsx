@@ -61,8 +61,9 @@ export default function AInplaceEditor (props: IAInplaceEditor) {
           />
         </div> :
         <div className={showcls} onClick={disable ? () => {} : toChangeValue}>
-          { format ? format(value) : value }
-          👃
+          <>
+            { format ? format(value) : value }
+          </>
         </div>
       }
     </div>

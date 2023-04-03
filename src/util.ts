@@ -195,3 +195,34 @@ export function getEnumLabel(enumData: Record<any, any>, key?: string | number) 
   const current = Object.entries(enumData).find(([, value]) => value === key)
   return current?.[0]
 }
+
+/**
+ * iframe通信
+ */
+// 被嵌入的子页面向父页面发送消息
+window.parent.postMessage({
+  action: 'CLOSE_AMP_ORDER',
+  namespace: 'amp',
+  content: {}
+}, '*')
+// 嵌入的父页面监听子页面分发的信息
+const materialSelectorListener = (e: MessageEvent) => {
+  if (e.origin.includes('chuangyi')) {
+    const { action, content: payload } = e.data
+    switch (action) {
+      /* 素材库就绪 */
+      case 'CENTRAL_SUCAI_READY': {
+        return
+      }
+      /* 关闭素材库 */
+      case 'CENTRAL_SUCAI_CANCEL': {
+        // return onClose?.()
+      }
+      /* 选择素材 */
+      case 'CENTRAL_SUCAI_SELECTED': {
+        // return onChange?.(payload)
+      }
+    }
+  }
+}
+window.addEventListener('message', materialSelectorListener)
