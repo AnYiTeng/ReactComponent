@@ -67,8 +67,7 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 慢启动是拥塞速率算法，在tp/ip网络中一开始进行数据传输时，以很小的速率进行传输数据，然后慢慢增大，直到产生拥塞的情况
-               * 或达到网络最大带宽，然后再慢慢降低，慢启动可以让发送方以实际网络情况在不丢包的前提下以最大速率进行数据传输
+               * 
                */
               
               function insertSort(arr) {
