@@ -50,7 +50,8 @@
             在 React18 之后，任何情况都会自动执行批处理，多次更新始终合并为一次
           2.引入新的 root API，React.createRoot(root).render(<App />)，支持并发模式渲染(因为 js 是单线程的，所以当 React 执行
             某些操作时，会阻塞其他进程，例如 UI 渲染，并发模式允许 React 调度程序选取更紧急的任务执行，保持平滑的响应用户需求，避免卡顿)
-          3.flushSync 可以关闭批处理
+          3.flushSync 用于同步执行React更新的方法，强制React立即执行挂起的更新而不是等待浏览器空闲时执行，能够帮助我们优先处理更重要的
+            UI更新
           4.React 组件允许返回 null 或 undefined，18之前只允许返回 Null
         </div>
       <li>5.Redux工作流程</li>

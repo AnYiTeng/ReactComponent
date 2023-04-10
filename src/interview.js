@@ -67,13 +67,8 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * vite将项目分为源码和依赖两部分，vite使用esbuild对依赖进行预构建，依赖多为不会变动的js文件，esbuild使用
-               * go语言编写，要比js编写的构建工具快10-100倍。源码多为需要转化的非js文件，vite会将源码以esm方式提供给浏览器，
-               * 并且不会一次性全部提供，浏览器请求部分源码，然后vite按需将请求的源码以esm方式提供给浏览器
-               * 
-               * vite的热更新也是基于esm方式的，不会像webpack一样这个项目重新加载，会捕获到具体某个模块然后进行准去更新
-               * 
-               * vite还使用http缓存来帮助加载页面，源码部分使用协商缓存，依赖部分使用catch-contral: max-age进行强缓存
+               * 1.自动批处理，在react18之前，只有在react事件中才会执行自动批处理，在异步事件和js原生事件中都不会执行
+               * 自动批处理，react18之后，所有事件中都会执行自动批处理
                */
               
               function insertSort(arr) {
