@@ -67,17 +67,26 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 1.自动批处理，在react18之前，只有在react事件中才会执行自动批处理，在异步事件和js原生事件中都不会执行
-               * 自动批处理，react18之后，所有事件中都会执行自动批处理
+               * 
                */
               
-              function insertSort(arr) {
-                let len = arr.len
-                for (let i=1; i<len; i++) {
-                  for (let j=i; j>0; j--) {
-                    
+              function quickSort(arr) {
+                let len = arr.length
+                if (len <= 1) {
+                  return arr
+                }
+                let middleIndex = Math.floor(len / 2)
+                let middleValue = arr.splice(middleIndex, 1)[0]
+                let leftArr = []
+                let rightArr = []
+                for (let i=0; i<=len; i++) {
+                  if (arr[i] < middleValue) {
+                    leftArr.push(arr[i])
+                  } else {
+                    rightArr.push(arr[i])
                   }
                 }
+                return quickSort(leftArr).concat(middleValue, quickSort(rightArr))
               }
               
               // Execute callback
