@@ -67,7 +67,10 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 
+               * 1.读取webpack的配置文件，就是webpack.config.json，是对webpack运行过程的配置
+               * 2.根据配置文件获取入口文件，递归的获取依赖关系
+               * 3.根据依赖关系，将被依赖的模块加载进来，并且使用loader和plugin对依赖模块进行打包，输出一个或多个打包文件
+               * 4.将打包后的文件输出到生产环境
                */
               
               function quickSort(arr) {
