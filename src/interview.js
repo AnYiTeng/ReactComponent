@@ -67,12 +67,7 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * Promise是用来创建promise对象的构造函数，一个promise对象用来表示一个异步操作的最终状态和最终结果值，这个值在
-               * promise对象被创建时是未知的，我们可以给他绑定一个成功和失败的回调，让异步方法可以像同步方法一样被返回。
-               * finally: 无论成功和失败都会执行的回调
-               * all: 接收一个promise对象数组，当所有promise对象都成功时再执行成功回调，否则执行失败回调
-               * any: 接收一个promise对象数组，任意一个promise对象返回成功就执行成功回调
-               * race: 接收一个promise对象数组，返回第一个执行结束的promise对象结果
+               * 
                */
               
               function quickSort(arr) {

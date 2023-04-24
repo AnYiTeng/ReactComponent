@@ -232,3 +232,9 @@ const materialSelectorListener = (e: MessageEvent) => {
   }
 }
 window.addEventListener('message', materialSelectorListener)
+
+/** fetch请求携带cookie 加上这个配置即可 */
+// fetchOption: {
+//   credentials: 'include' as const,
+// },
+
