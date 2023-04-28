@@ -238,3 +238,11 @@ window.addEventListener('message', materialSelectorListener)
 //   credentials: 'include' as const,
 // },
 
+/** chrome 允许跨安全策略打开命令 */
+// /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors --ignore-urlfetcher-cert-requests &> /dev/null
+
+// --allow-file-access-from-files
+// /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors --ignore-urlfetcher-cert-requests --allow-file-access-from-files &> /dev/null
+
+
+

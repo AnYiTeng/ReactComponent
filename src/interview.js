@@ -70,23 +70,16 @@ function registerValidSW(swUrl, config) {
                * 
                */
               
-              function quickSort(arr) {
+              function bubbleSort(arr) {
                 let len = arr.length
-                if (len <= 1) {
-                  return arr
-                }
-                let middleIndex = Math.floor(len / 2)
-                let middleValue = arr.splice(middleIndex, 1)[0]
-                let leftArr = []
-                let rightArr = []
                 for (let i=0; i<=len; i++) {
-                  if (arr[i] < middleValue) {
-                    leftArr.push(arr[i])
-                  } else {
-                    rightArr.push(arr[i])
+                  for (let j=1; j<len-i; j++) {
+                    if (arr[j] < arr[j-1]) {
+                      [arr[j], arr[j-1]] = [arr[j-1], arr[j]]
+                    }
                   }
                 }
-                return quickSort(leftArr).concat(middleValue, quickSort(rightArr))
+                return arr
               }
               
               // Execute callback
