@@ -11,6 +11,10 @@
   <div>
     1.TS NonNullable 可以过滤掉可能为null和undefined的情况，Array[number]取得是数组类型的任意一项类型
       type ISubmitReplay = Array<NonNullable<IModels['POST/wtsy/livecourse/cutReplayVideo.json']['Req']['query']['replayVideoCutList']>[number] & { originUrl?: string }>
+    2.fetch请求带上token、cookie
+      fetchOption: {
+        credentials: 'include' as const,
+      },
   </div>
 
   <div>
