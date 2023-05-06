@@ -244,5 +244,28 @@ window.addEventListener('message', materialSelectorListener)
 // --allow-file-access-from-files
 // /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors --ignore-urlfetcher-cert-requests --allow-file-access-from-files &> /dev/null
 
+/**
+ * 动态加载script文件
+ */
+const initVideox = () => {
+  return new Promise<void>(resolve => {
+    const script = document.createElement('script')
+    script.src = 'https://g.alicdn.com/mtb/videox/0.4.14/videox-pc.js'
 
+    // link引入样式文件时需要添加rel = stylesheet，告知浏览器这是样式文件需要应用到html上
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = 'https://g.alicdn.com/de/prismplayer/2.9.7/skins/default/aliplayer-min.css'
+    
+    script.addEventListener('load', () => {
+      resolve()
+    })
+    document.head.appendChild(link)
+    document.body.appendChild(script)
+  })
+}
+
+const prepare = async () => {
+  await initVideox()
+}
 
