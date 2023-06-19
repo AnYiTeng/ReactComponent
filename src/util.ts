@@ -270,3 +270,29 @@ const prepare = async () => {
   await initVideox()
 }
 
+/**
+ * 覆盖输入框自动填充样式的方法
+ */
+// input{
+//   -webkit-text-fill-color: #fff;
+//   &:-webkit-autofill {
+//     box-shadow: inset 0 0 0 2000px #000;
+//   }
+// }
+
+/**
+ * umi项目默认启动8000端口，两个项目同时启动，都会占用8000端口，可以在 package.json 的 script 中配置启动默认端口。
+ */
+// "scripts": {
+//   "start": "set PORT=8001 && dumi dev"
+// }
+
+/**
+ * https://www.npmjs.com/package/react-rnd
+ * React-RND 库是一个基于 React 的可调整大小和可拖动的组件库。它允许用户通过拖动和调整大小来改变组件的位置和尺寸
+ */
+
+/**
+ * https://www.npmjs.com/package/immer
+ * immerjs 是利用Proxy实现的类似深克隆库
+ */
