@@ -296,3 +296,8 @@ const prepare = async () => {
  * https://www.npmjs.com/package/immer
  * immerjs 是利用Proxy实现的类似深克隆库
  */
+
+/**
+ * https://www.npmjs.com/package/rc-virtual-list
+ * rc-virtual-list 模拟滚动库
+ */
