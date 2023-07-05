@@ -2,6 +2,7 @@
  * 画图工具：https://excalidraw.com/
  * AST: https://astexplorer.net/
  * 创建指定大小图片：https://dummyimage.com/
+ * PDF工具：https://www.ilovepdf.com/
  */
 
 /**
@@ -232,3 +233,71 @@ const materialSelectorListener = (e: MessageEvent) => {
   }
 }
 window.addEventListener('message', materialSelectorListener)
+
+/** fetch请求携带cookie 加上这个配置即可 */
+// fetchOption: {
+//   credentials: 'include' as const,
+// },
+
+/** chrome 允许跨安全策略打开命令 */
+// /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors --ignore-urlfetcher-cert-requests &> /dev/null
+
+// --allow-file-access-from-files
+// /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors --ignore-urlfetcher-cert-requests --allow-file-access-from-files &> /dev/null
+
+/**
+ * 动态加载script文件
+ */
+const initVideox = () => {
+  return new Promise<void>(resolve => {
+    const script = document.createElement('script')
+    script.src = 'https://g.alicdn.com/mtb/videox/0.4.14/videox-pc.js'
+
+    // link引入样式文件时需要添加rel = stylesheet，告知浏览器这是样式文件需要应用到html上
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = 'https://g.alicdn.com/de/prismplayer/2.9.7/skins/default/aliplayer-min.css'
+    
+    script.addEventListener('load', () => {
+      resolve()
+    })
+    document.head.appendChild(link)
+    document.body.appendChild(script)
+  })
+}
+
+const prepare = async () => {
+  await initVideox()
+}
+
+/**
+ * 覆盖输入框自动填充样式的方法
+ */
+// input{
+//   -webkit-text-fill-color: #fff;
+//   &:-webkit-autofill {
+//     box-shadow: inset 0 0 0 2000px #000;
+//   }
+// }
+
+/**
+ * umi项目默认启动8000端口，两个项目同时启动，都会占用8000端口，可以在 package.json 的 script 中配置启动默认端口。
+ */
+// "scripts": {
+//   "start": "set PORT=8001 && dumi dev"
+// }
+
+/**
+ * https://www.npmjs.com/package/react-rnd
+ * React-RND 库是一个基于 React 的可调整大小和可拖动的组件库。它允许用户通过拖动和调整大小来改变组件的位置和尺寸
+ */
+
+/**
+ * https://www.npmjs.com/package/immer
+ * immerjs 是利用Proxy实现的类似深克隆库
+ */
+
+/**
+ * https://www.npmjs.com/package/rc-virtual-list
+ * rc-virtual-list 模拟滚动库
+ */
