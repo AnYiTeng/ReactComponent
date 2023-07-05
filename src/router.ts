@@ -4,6 +4,7 @@
 import HomePage from './page/home'
 import TestView from './page/testView'
 import ListView from './page/ListView'
+import Playground from './page/playground'
 
 
 export default [
@@ -24,4 +25,8 @@ export default [
     path: '/listView',
     component: ListView
   },
+  {
+    path: '/playground',
+    component: Playground
+  }
 ]
