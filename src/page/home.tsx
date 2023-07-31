@@ -1,65 +1,65 @@
-import React, { useState, useEffect } from 'react'
-import { DropList } from '../global/globalType'
-import AButton from '../components/button'
-import AModal from '../components/modal'
-import ALoad from '../components/load'
-import AInput from '../components/input'
-import {AMessage} from '../components/message'
-import AInplaceEditor from '../components/inplaceEditor'
-import ACollapse from '../components/collapse'
-import AComment from '../components/comment'
-import ADropdown from '../components/dropdown'
-import ACarousel from '../components/carousel'
-import Rate from '../components/rates'
-import ChangeTheme from './changeTheme'
-import './home.css'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { DropList } from "../global/globalType";
+import AButton from "../components/button";
+import AModal from "../components/modal";
+import ALoad from "../components/load";
+import AInput from "../components/input";
+import { AMessage } from "../components/message";
+import AInplaceEditor from "../components/inplaceEditor";
+import ACollapse from "../components/collapse";
+import AComment from "../components/comment";
+import ADropdown from "../components/dropdown";
+import ACarousel from "../components/carousel";
+import Rate from "../components/rates";
+import ChangeTheme from "./changeTheme";
+import "./home.css";
+import { Link } from "react-router-dom";
 // import { MuxMessage } from '@alife/mux-components'
-import ClassTest from './classTest'
-import FnTest from './fnTest'
+import ClassTest from "./classTest";
+import FnTest from "./fnTest";
 // import { Button, Tabs } from 'antd'
 // import 'antd/dist/antd.css'
 
 // const { TabPane } = Tabs
 
-export default function HomePage () {
-  const [ modalVisible, setModalVisible ] = useState(false)
-  const [ loading, setLoading ] = useState(false)
-  const [ inputValue, setInputValue ] = useState('123')
-  const [ inplaceEditorValue1, setInplaceEditorValue1 ] = useState(100)
-  const [ inplaceEditorValue2, setInplaceEditorValue2 ] = useState(100)
-  const [ inplaceEditorValue3, setInplaceEditorValue3 ] = useState('200元')
-  const [ dropList, setDropList ] = useState<DropList[]>([])
-  const [info, setInfo] = useState(0)
-  const [tabVisible, setTabVisible] = useState(false)
-  const [themeChoice, setThemeChoice] = useState(true)
+export default function HomePage() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState("123");
+  const [inplaceEditorValue1, setInplaceEditorValue1] = useState(100);
+  const [inplaceEditorValue2, setInplaceEditorValue2] = useState(100);
+  const [inplaceEditorValue3, setInplaceEditorValue3] = useState("200元");
+  const [dropList, setDropList] = useState<DropList[]>([]);
+  const [info, setInfo] = useState(0);
+  const [tabVisible, setTabVisible] = useState(false);
+  const [themeChoice, setThemeChoice] = useState(true);
 
   useEffect(() => {
     setDropList([
-      {value: 0, label: '选项1'},
-      {value: 1, label: '选项2'},
-      {value: 3, label: '选项3'},
-    ])
-  }, [])
+      { value: 0, label: "选项1" },
+      { value: 1, label: "选项2" },
+      { value: 3, label: "选项3" },
+    ]);
+  }, []);
 
   const toOpeanModal = () => {
-    setModalVisible(true)
-  }
+    setModalVisible(true);
+  };
 
   const modalCancle = () => {
-    setModalVisible(false)
-  }
+    setModalVisible(false);
+  };
   const modalConfirm = () => {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
-      setModalVisible(false)
-      setLoading(false)
-    }, 1000)
-  }
+      setModalVisible(false);
+      setLoading(false);
+    }, 1000);
+  };
 
   const openSuccessMessage = () => {
     // return AMessage({}).success
-  }
+  };
 
   const modalChildren = () => {
     return (
@@ -81,8 +81,8 @@ export default function HomePage () {
           <div className="skill-name">冰封陵墓</div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="main">
@@ -90,25 +90,19 @@ export default function HomePage () {
       {/* <Link to="/test">
         去往测试页面
       </Link> */}
-      <a href="javascript:;" className="test-link">测试啊</a>
+      <a href="javascript:;" className="test-link">
+        测试啊
+      </a>
 
       {/* <div className="text">以铜为镜，可以正衣冠；以史为镜，可以知兴替；以人为镜，可以明得失。</div> */}
-      <AButton
-        classname="invalid-btn"
-        canClick={false}
-        children="禁用按钮"
-      />
+      <AButton classname="invalid-btn" canClick={false} children="禁用按钮" />
       <AButton
         onClick={toOpeanModal}
         classname="open-btn"
         children="打开弹窗"
       />
-      <AButton
-        classname="invalid-btn"
-        children="链接按钮"
-        types="link"
-      />
-      <AModal 
+      <AButton classname="invalid-btn" children="链接按钮" types="link" />
+      <AModal
         visible={modalVisible}
         titleText="冰霜女巫丽桑卓技能介绍"
         children={modalChildren()}
@@ -118,42 +112,39 @@ export default function HomePage () {
         confirmText="确定"
         cancleText="关闭"
       />
-      <ALoad 
-        classname="load" 
-        visible={loading}
+      <ALoad classname="load" visible={loading} />
+      <AInput
+        classname="input"
+        placeHolder="请输入你想输入的内容"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
       <AInput
         classname="input"
         placeHolder="请输入你想输入的内容"
         value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
-      />
-      <AInput
-        classname="input"
-        placeHolder="请输入你想输入的内容"
-        value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
+        onChange={(e) => setInputValue(e.target.value)}
         size="small"
       />
       <AInput
         classname="input"
         placeHolder="请输入你想输入的内容"
         value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
+        onChange={(e) => setInputValue(e.target.value)}
         size="big"
       />
-      <br/>
+      <br />
       <AButton
-        style={{marginTop: "10px"}}
+        style={{ marginTop: "10px" }}
         onClick={openSuccessMessage}
         children="成功提示"
       />
-      <br/>
+      <br />
       <div className="inplace-wrapper">
         只能输入数字:
         <AInplaceEditor
-          style={{marginLeft: "10px"}}
-          format={inplaceEditorValue1 => (+inplaceEditorValue1).toFixed(2)}
+          style={{ marginLeft: "10px" }}
+          format={(inplaceEditorValue1) => (+inplaceEditorValue1).toFixed(2)}
           value={inplaceEditorValue1}
           onChange={(v) => setInplaceEditorValue1(v)}
         />
@@ -164,12 +155,12 @@ export default function HomePage () {
           className="inplace-editor"
           value={inplaceEditorValue2}
           onChange={(v) => setInplaceEditorValue2(v)}
-        /> 
+        />
       </div>
       <div className="inplace-wrapper">
         禁止更改:
         <AInplaceEditor
-          style={{marginLeft: "10px"}}
+          style={{ marginLeft: "10px" }}
           value={inplaceEditorValue3}
           disable={true}
         />
@@ -180,14 +171,8 @@ export default function HomePage () {
         isUnfold={true}
         className="collapse-wrapper"
       />
-      <ACollapse
-        titleText="点击展开"
-        contentText="展开的内容"
-      />
-      <AComment 
-        className="mt10"
-        nameProps="lisangzhuo"
-      />
+      <ACollapse titleText="点击展开" contentText="展开的内容" />
+      <AComment className="mt10" nameProps="lisangzhuo" />
       {/* <ADropdown className="mt10" dropList={dropList}/> */}
 
       <ACarousel isAutoPlay={false} />
@@ -214,47 +199,55 @@ export default function HomePage () {
 
       <ChangeTheme visible={themeChoice} toClose={setThemeChoice} />
     </div>
-  )
+  );
 }
 
-
 // q1.
-new Promise(resolve => {
+new Promise((resolve) => {
   setTimeout(() => {
-    resolve(1)
-  }, 1000)
+    resolve(1);
+  }, 1000);
 })
-  .then(data => 2)
-  .then(data => console.log(data)) // 2
-  .catch(err => console.error(err))
+  .then((data) => 2)
+  .then((data) => {
+    // console.log(data)
+  }) // 2
+  .catch((err) => {
+    // console.error(err)
+  })
   .finally(() => {
-    console.log('hello world')
-  })  // hello world
+    // console.log('hello world')
+  }); // hello world
 
 // q2.
 Promise.all([
-  new Promise(resolve => setTimeout(() => resolve(1), 1000)),
-  new Promise(resolve => setTimeout(() => resolve(2), 2000)),
-  new Promise(resolve => setTimeout(() => resolve(3), 3000)),
-])
-  .then(datas => console.log(datas))  // [1, 2, 3]
+  new Promise((resolve) => setTimeout(() => resolve(1), 1000)),
+  new Promise((resolve) => setTimeout(() => resolve(2), 2000)),
+  new Promise((resolve) => setTimeout(() => resolve(3), 3000)),
+]).then((datas) => {
+  // console.log(datas)
+}); // [1, 2, 3]
 
 // answer
 class IPromise {
-  constructor () {
-
-  }
-  static all () {
-
-  }
+  constructor() {}
+  static all() {}
 }
 
-
 // q3.
-const version = ['1.4.5', '2.1.1', '2.3.0', '1.15.0', '6.1', '3', '3.3.3.3.3.3', '7']
+const version = [
+  "1.4.5",
+  "2.1.1",
+  "2.3.0",
+  "1.15.0",
+  "6.1",
+  "3",
+  "3.3.3.3.3.3",
+  "7",
+];
 // ['1.4.5', '1.15.0', '2.1.1', '2.3.0', '3', '3.3.3.3.3.3', '6.1', '7']
 
 // version sort
 const sortVersion = (versions: string[]) => {
-  // 
-}
+  //
+};
