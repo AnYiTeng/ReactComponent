@@ -301,3 +301,62 @@ const prepare = async () => {
  * https://www.npmjs.com/package/rc-virtual-list
  * rc-virtual-list 模拟滚动库
  */
+
+/**
+ * 获取文件真实后缀
+ * 图片后缀更改后，可以通过读取文件头信息里的文件签名，获取源文件的真实后缀（如PNG图片更改后缀为JPG，可以通过 FileReader 及 DataView读取文件头中的源文件签名信息，用来判断文件真实后缀）
+*/
+const getSuffixFromHeader = (dataView: any) => {
+  // 源文件签名与后缀对应表
+  const signatures: any = {
+    FFD8: 'JPG',
+    '89504E47': 'PNG',
+    '47494638': 'GIF',
+    '424D': 'BMP',
+  };
+
+  const headerBytes = [];
+  for (let i = 0; i < 4; i++) {
+    headerBytes.push(dataView.getUint8(i).toString(16));
+  }
+  const headerStr = headerBytes.join('').toUpperCase();
+  return signatures[headerStr] || 'unknown';
+};
+const getFileMate = (file: any) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    let suffix = 'unknown';
+    reader.onload = function (e: any) {
+      const arrayBuffer = e.target.result;
+      const view = new DataView(arrayBuffer);
+      // 根据view读取文件头信息并获取后缀
+      suffix = getSuffixFromHeader(view);
+      resolve(suffix);
+    };
+    reader.readAsArrayBuffer(file.slice(0, 10 * 1024 * 1024));
+  });
+};
+
+/** 截取指定字节长度字符串 */
+export const cutstringByUtf8Bytes = (str: string, byteCount: number) => {
+  //使用nodejs的Buffer将字符串转换为Buffer对象，使用utf-8编码
+  const buffer = Buffer.from(str,'utf-8');
+  //如果Buffer的长度小于或等于所需字节数，直接返回字符串
+  if(buffer.length <= byteCount){
+    return str;
+  }
+  //截取所需字节数的Buffer片段
+  const slicedBuffer = buffer.slice(0, byteCount);
+  //将截取的Buffer转换回字符串，使用utf-8编码
+  //这里可能需要特殊处理，因为截取后的Buffer可能位于字符的中间
+  //所以解码可能产生乱码或不完整的字符
+  let result = (slicedBuffer as any).tostring('utf-8',0, byteCount)
+  //尝试修复可能的乱码或不完整字符
+  //将截取后的字符串再次转换为Buffer，然后去掉最后一个字符
+  const lastCharBuffer = Buffer.from(result,'utf-8');
+  if(lastCharBuffer.length >1){
+    // 去掉最后一个不完整的字符
+    result =result.slice(0, -1);
+  }
+  return result;
+}
