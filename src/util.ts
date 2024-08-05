@@ -38,6 +38,7 @@ export const arrayGroupBy = (list: any[], groupId: string) => {
  * 获取hash参数
  */
 export const getHashSearchParam = (key: any) => {
+  // eslint-disable-next-line no-restricted-globals
   const url = location.href
   // 获取 hash 值，不包含 '#' 号
   const hash = url.substring(url.indexOf("#") + 1)

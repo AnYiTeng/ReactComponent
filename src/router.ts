@@ -5,9 +5,9 @@ import HomePage from './page/home'
 import TestView from './page/testView'
 import ListView from './page/ListView'
 import Playground from './page/playground'
+import VideoView from './page/videoView'
 
-
-export default [
+const RouterList = [
   {
     path: '/',
     component: HomePage
@@ -28,5 +28,11 @@ export default [
   {
     path: '/playground',
     component: Playground
-  }
+  },
+  {
+    path: '/videoView',
+    component: VideoView
+  },
 ]
+
+export default RouterList

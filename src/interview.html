@@ -75,7 +75,7 @@
         </div>
       <li>6.react hook为什么不能放到条件判断中</li>
         <div>
-          react是通过单链表来管理hooks的，按hooks的执行顺序依次将hooks节点添加到链表中，每个hook都有两个定义，mount阶段和update阶段，
+          react是通过单链表来管理hooks的，按hooks的执行顺序依次将hooks节点添加到链表中，每个hook都有两个定阶段，mount阶段和update阶段，
           mount阶段是初始化状态，update阶段会依次执行update链表中的所有更新操作，最终拿到新的state返回，如果我们将hook放在条件判断中，
           mount阶段初始化了abc三个状态，但是b因为不满足条件在update阶段没有执行，那么就会出现链表取值偏移问题，react就会报错。
         </div>
