@@ -67,7 +67,8 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * 
+               * js的本质就是操作dom，如果两个js事件操作了同一个dom，就会产生冲突，所以js是单线程的，为了处理高优先级的任务，
+               * js又分为了
                */
               
               function bubbleSort(arr) {
