@@ -12,6 +12,7 @@ import ADropdown from "../components/dropdown";
 import ACarousel from "../components/carousel";
 import Rate from "../components/rates";
 import ChangeTheme from "./changeTheme";
+import ASign from "../components/sign/sign";
 import "./home.css";
 import { Link } from "react-router-dom";
 // import { MuxMessage } from '@alife/mux-components'
@@ -198,6 +199,8 @@ export default function HomePage() {
       </Tabs> */}
 
       <ChangeTheme visible={themeChoice} toClose={setThemeChoice} />
+
+      <ASign bgColor="red" />
     </div>
   );
 }
