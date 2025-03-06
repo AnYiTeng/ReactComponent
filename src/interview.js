@@ -67,8 +67,10 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               /**
-               * js的本质就是操作dom，如果两个js事件操作了同一个dom，就会产生冲突，所以js是单线程的，为了处理高优先级的任务，
-               * js又分为了
+               * React state发生变化时，react就会重新进行计算，在fiber出现之前，这个计算的过程是不可中断的，那么如果计算量特别的大，
+               * 就会造成卡顿，无法响应用户的交互，fiber的出现就是为了让这个计算的过程变得可被中断，fiber可以理解为一个执行单元，比如
+               * 一个10s的计算任务，可以分为10份fiber，每执行完一份就去检查是否还有下一份fiber，有的话并且当前时间足够执行就去执行，
+               * 否则将执行权交回给浏览器，优先响应用户的交互
                */
               
               function bubbleSort(arr) {
