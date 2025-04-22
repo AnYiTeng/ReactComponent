@@ -2,7 +2,7 @@
   padding: 10px;
 }
 .text {
-  color: var(--app-main-caolor);
+  color: var(--app-main-color);
 }
 .invalid-btn {
   margin-right: 10px;

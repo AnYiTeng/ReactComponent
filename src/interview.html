@@ -509,11 +509,80 @@
           3、功耗不同：集显的能耗小，发热量也必将小；独显的能耗大、发热量大
           4、供电不同：集显非常省电，不需要单独供电；独显需要有足够瓦数的电源
         </div>
+      <li>50.MCP是什么</li>
+        <div>
+          定义：
+          MCP是模型上下文协议（Model Context Protocol）的简称，是一个开源协议，由Anthropic开发，旨在让大语言模型能够以标准化的方式连接到外部数据源
+          和工具。它就像AI应用的通用接口，帮助开发者构建更灵活、更具上下文感知能力的AI应用，而无需为每个AI模型和外部系统组合进行定制集成。MCP被设计为一个
+          通用接口，类似于USB-C端口，允许LLM应用以一致的方式连接到各种数据源和工具，如文件、数据库、API等
+          MCP目前一共有三个核心概念：
+          1、MCP Server：
+            1）基于各语言的MCP SDK开发的程序或服务
+            2）基于某种神秘的机制将现存的程序或服务进行了转换，使其成为了MCP Server
+          2、MCP Tool：
+            1）MCP Tool所属于MCP Server，一个MCP Server可以有很多个MCP Tool。可以理解为一个类里有多个方法，或者类似一个服务里有多个接口
+          3、MCP Client：
+            1）当一段代码，一个Agent，一个客户端，基于MCP的规范去使用、去调用MCP Server里的MCP Tool时，它就是MCP Client
+        </div>
+      <li>51.MCP的运作机制</li>
+        <div>图片示例：https://img.alicdn.com/imgextra/i3/O1CN01Vev3v11hiUUS056WZ_!!6000000004311-2-tps-919-517.png</div>
+        <div>
+          如上图所示，一次基于MCP的调用，一共有6个核心步骤。我们先拟定一个前提：
+          1、我要开发一个获取时间的AI Agent，用户在使用这个AI Agent时，只需要问类似“现在几点了？”这种问题即可
+          2、我已经有一个关于处理时间的MCP Server，这个MCP Server里有2个MCP Tool，一个负责获取当前时区，一个负责获取当前时间
+          调用步骤解析：
+          1、第一步：用户向AI Agent问“现在几点了？”，此时AI Agent会把用户的问题和处理时间的MCP Server以及MCP Tool的信息一起发给LLM
+          2、第二步：LLM拿到信息后开始推理，基于用户的问题和MCP Server的信息，选出解决用户问题最合适的那个MCP Server和MCP Tool，然后返回给AI Agent
+            1）这里LLM返回给AI Agent的信息是：“你用time这个MCP Server里的get_current_time这个MCP Tool吧，他可以解决用户的问题”
+          3、第三步：AI Agent现在知道该使用哪个MCP Server里的哪个MCP Tool了，直接调用那个MCP Tool，获取结果：
+            1）调用time这个MCP Server里的get_current_time这个MCP Tool
+          4、第四步：Time MCP Server返回结果（当前的时间）给AI Agent
+          5、第五步：AI  Agent也很懒，把用户的问题和从Time MCP Server处拿到的结果再一次给了LLM，目的是让LLM结合问题和答案再规整一下内容
+          6、第六步：LLM把规规整整的内容返回给AI Agent，最后AI Agent再原封不动的返回给了用户
+        </div>
     </ul> 
+  </div>
+
+
+  <div>
+    AI Agent
+    简单来说，Agent 是具备自主性（Autonomy）的 AI 系统，它们不仅仅是被动地响应，更能主动地感知环境（Perception）、制定计划（Planning）、**做出决策（Decision Making）并采取行动（Action）**以达成特定目标
   </div>
 </body>
 <!-- 手写题 -->
 <script>
+  // 接入百炼模型
+  export const modelName = "qwen-plus"
+  const API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions";
+  const API_KEY = "sk-d9952b75266f4a448941f529b8b47fa7"; // API 密钥
+
+  export const fetchResponse = async (messages, signal) => {
+      try {
+          const response = await fetch(API_URL, {
+              signal,
+              method: 'POST',
+              headers: {
+                  "Authorization": `Bearer ${API_KEY}`,
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                  model: modelName, // 模型名
+                  messages: messages,
+              })   
+          });
+          // 使用 response.body，确保它是可读取的
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          const { done: streamDone, value } = await reader.read();
+          const chunk = decoder.decode(value, { stream: true });
+          return JSON.parse(`${chunk}`)
+      } catch (error) {
+          console.error("Error fetching data from API:", error);
+          throw error; // 重新抛出错误以便处理
+      }
+  };
+
+
   // 防抖
   function debounce(fn, wait = 50) {
     let timer = null

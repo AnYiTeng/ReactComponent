@@ -5,8 +5,8 @@
   background-color: #fff;
 }
 .drop-btn:hover {
-  color: var(--app-main-caolor);
-  border-color: var(--app-main-caolor);
+  color: var(--app-main-color);
+  border-color: var(--app-main-color);
 }
 .drop-content-wrapper {
   background-color: #fff;

@@ -1,7 +1,7 @@
 .a-carousel {
   width: 300px;
   height: 100px;
-  border: 1px solid var(--app-main-caolor);
+  border: 1px solid var(--app-main-color);
   overflow: hidden;
   position: relative;
 }

@@ -15,6 +15,7 @@ import ChangeTheme from "./changeTheme";
 import ASign from "../components/sign/sign";
 import "./home.css";
 import { Link } from "react-router-dom";
+import ModalInput from '../components/ModalInput'
 // import { MuxMessage } from '@alife/mux-components'
 import ClassTest from "./classTest";
 import FnTest from "./fnTest";
@@ -201,6 +202,8 @@ export default function HomePage() {
       <ChangeTheme visible={themeChoice} toClose={setThemeChoice} />
 
       <ASign bgColor="red" />
+
+      <ModalInput style={{ marginTop: 40 }} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 /*css3变量覆盖*/
 :root[theme-color = 'blue'] {
-  --app-main-caolor: #3e3eff;
+  --app-main-color: #3e3eff;
   --app-brand: #3e3eff;
   --app-brand-gradient: #3e3eff;
   --app-nav-bg: #303a58;
@@ -35,7 +35,7 @@
   --input-small-height: 26px;
 }
 :root[theme-color = 'red'] {
-  --app-main-caolor: #a40100;
+  --app-main-color: #a40100;
   --app-brand: #a40100;
   --app-brand-gradient: #a40100;
   --app-nav-bg: #303a58;

@@ -12,7 +12,7 @@
   transition: border-color .2s;
 }
 .a-inplace-show:hover {
-  border-bottom: 1px solid var(--app-main-caolor);
+  border-bottom: 1px solid var(--app-main-color);
 }
 .a-inplace-disable {
   color: #d8d8d8;
