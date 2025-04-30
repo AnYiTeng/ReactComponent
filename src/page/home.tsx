@@ -19,6 +19,8 @@ import ModalInput from '../components/ModalInput'
 // import { MuxMessage } from '@alife/mux-components'
 import ClassTest from "./classTest";
 import FnTest from "./fnTest";
+import useRecord, { RECORD_STATUS } from '../common/hox/use-record'
+import { v4 as uuidv4 } from 'uuid';
 // import { Button, Tabs } from 'antd'
 // import 'antd/dist/antd.css'
 
@@ -35,6 +37,14 @@ export default function HomePage() {
   const [info, setInfo] = useState(0);
   const [tabVisible, setTabVisible] = useState(false);
   const [themeChoice, setThemeChoice] = useState(true);
+  const [recordMsg, setRecordMsg] = useState('')
+  const recordInfo = useRecord({
+    onRecordMessage: (param) => {
+      if (param.method === 'setInputText') {
+        setRecordMsg((pre) => pre.concat(param.text));
+      }
+    },
+  });
 
   useEffect(() => {
     setDropList([
@@ -204,6 +214,15 @@ export default function HomePage() {
       <ASign bgColor="red" />
 
       <ModalInput style={{ marginTop: 40 }} />
+
+      <AButton style={{ marginTop: 40 }} onClick={() => {
+        if (recordInfo.recordStatus === RECORD_STATUS.RECORDING) {
+          recordInfo?.stopRecord();
+        } else {
+          recordInfo.startRecord({ fillMode: 'input', conversationId: uuidv4() });
+        }
+      }}>{recordInfo.recordStatus === RECORD_STATUS.RECORDING ? '停止' : '开始'}录音</AButton>
+      <div>录音信息: {recordMsg}</div>
     </div>
   );
 }

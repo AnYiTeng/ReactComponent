@@ -8,7 +8,7 @@ import classnames from 'classnames'
 interface IABtn extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   classname?: string
   style?: CSSProperties
-  children?: string
+  children?: ReactNode
   onClick?: () => void
   canClick?: boolean
   types?: 'normal' | 'link'
@@ -40,7 +40,7 @@ export default function AButton (props: IABtn) {
   const a = '26px'
   return (
     <>
-      <button {...otherProps} style={{ ['--mine-height' as any]: a }} className={cls} onClick={clickBtn}>{children}</button>
+      <button {...otherProps} style={{ ...style, ['--mine-height' as any]: a }} className={cls} onClick={clickBtn}>{children}</button>
     </>
   )
 }
