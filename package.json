@@ -7,7 +7,9 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.17.3",
+    "axios": "^1.10.0",
     "classnames": "^2.2.6",
+    "craco-less": "^3.0.1",
     "flv.js": "^1.6.2",
     "hox": "^1.1.4",
     "react": "^16.13.1",
@@ -15,10 +17,12 @@
     "react-onclickoutside": "^6.9.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
+    "react-syntax-highlighter": "^15.6.1",
     "react-use-gesture": "^7.0.16",
+    "recorder-core": "^1.3.25011100",
+    "tomorrow": "^9.0.3",
     "typescript": "^3.9.5",
-    "uuid": "^11.1.0",
-    "recorder-core": "^1.3.25011100"
+    "uuid": "^11.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,10 +48,12 @@
   "devDependencies": {
     "@types/classnames": "^2.2.10",
     "@types/react-router-dom": "^5.1.7",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "express": "^4.18.2",
     "express-ws": "^5.0.2",
     "fluent-ffmpeg": "^2.1.2",
-    "less": "^3.12.2",
+    "less": "^3.13.1",
+    "less-loader": "^12.3.0",
     "websocket-stream": "^5.5.2"
   }
 }

@@ -1,4 +1,39 @@
 /*css3变量覆盖*/
+:root {
+  --app-main-color: #3e3eff;
+  --app-brand: #3e3eff;
+  --app-brand-gradient: #3e3eff;
+  --app-nav-bg: #303a58;
+  --app-bg: #f7f8fa;
+  --color-brand: #3e3eff;
+  --color-brand-hover: #5128e6;
+  --color-brand-light: #ded4ff;
+  --color-brand-opacity: #eee9ff;
+  --color-brand-vs: #14c9ce;
+  --border-highlight: #e6e6e6;
+  --border-highlight-hover: #cccccc;
+  --btn-brand-text: #ffffff;
+  --btn-brand: #3e3eff;
+  --btn-brand-gradient: #3e3eff;
+  --btn-brand-text-hover: #ffffff;
+  --btn-brand-hover: #3080f4;
+  --btn-brand-gradient-hover: #5128e6;
+  --btn-border: #3e3eff;
+  --btn-bg: #f3f5fc;
+  --btn-text: #3e3eff;
+  --btn-border-hover: #3e3eff;
+  --btn-bg-hover: #eee9ff;
+  --btn-text-hover: #333333;
+  --btn-border-radius: 4px;
+  --color-warn: #ffb400;
+  --color-red: #a40100;
+  --color-green: #51a300;
+  --color-border: #e6e6e6;
+  --font-size: 12px;
+  --line-height: 1.5;
+  --input-height: 32px;
+  --input-small-height: 26px;
+}
 :root[theme-color = 'blue'] {
   --app-main-color: #3e3eff;
   --app-brand: #3e3eff;

@@ -6,6 +6,7 @@ import TestView from './page/testView'
 import ListView from './page/ListView'
 import Playground from './page/playground'
 import VideoView from './page/videoView'
+import AiPage from './page/aiPage'
 
 const RouterList = [
   {
@@ -32,6 +33,10 @@ const RouterList = [
   {
     path: '/videoView',
     component: VideoView
+  },
+  {
+    path: '/aiPage',
+    component: AiPage
   },
 ]
 

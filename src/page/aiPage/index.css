@@ -1,0 +1,35 @@
+.ai-page-wrapper {
+	padding: 40px;
+}
+.message-wrapper {
+	width: 400px;
+	height: calc(100vh - 100px);
+	overflow-y: auto;
+	user-select: text;
+	border-radius: 8px;
+	border: 1px solid;
+	margin-top: 16px;
+}
+.message-wrapper::-webkit-scrollbar {
+	width: 6px;
+}
+
+.user-wrapper {
+	margin-bottom: 4px;
+}
+.user-message {
+	background-color: #f4f0ff;
+	border-radius: 12px;
+	padding: 8px;
+	color: #333;
+}
+.system-message {
+	background-color: #fff;
+	border-radius: 12px;
+	padding: 12px;
+	color: #333;
+	margin-bottom: 16px;
+}
+.loading-text {
+		margin-right: 4px;
+}
