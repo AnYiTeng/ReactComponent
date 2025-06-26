@@ -4,7 +4,7 @@ import AButton from "../../components/button";
 import { useCreateAgent, modelName } from "../../mcp/agent";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow, solarizedlight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import './index.css'
+import './index.less'
 
 interface IMessage {
 	role: string,
