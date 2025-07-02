@@ -110,7 +110,6 @@ const ASign: React.FC<IProps> = ({
     if(!canvas) {
       return
     }
-    const { x, y } = canvas.getBoundingClientRect();
     // 设置宽高
     canvas.width = width;
     canvas.height = height;
@@ -120,84 +119,99 @@ const ASign: React.FC<IProps> = ({
       ctxRef.current = ctx;
       // 设置填充背景色
       ctx.fillStyle = bgColor;
-      // 绘制填充矩形
-      ctx.fillRect(
-        0, // x 轴起始绘制位置
-        0, // y 轴起始绘制位置
-        width, // 宽度
-        height // 高度
-      );
+      ctx.fillRect(0, 0, width, height);
     }
     // 保存上次绘制的 坐标及偏移量
     const client = {
-      offsetX: 0, // 偏移量
+      offsetX: 0,
       offsetY: 0,
-      endX: 0, // 坐标
+      endX: 0,
       endY: 0
     };
-
     // 判断是否为移动端
     const mobileStatus = (/Mobile|Android|iPhone/i.test(navigator.userAgent));
 
+    // 获取canvas在页面中的精确位置
+    const getCanvasOffset = () => {
+      const rect = canvas.getBoundingClientRect();
+      return { left: rect.left, top: rect.top };
+    };
+
     // 初始化
     const init = (event: Event) => {
-      // 获取偏移量及坐标
-      const { offsetX, offsetY, pageX, pageY } = mobileStatus ? (event as any).changedTouches[0] : event;
-
-
-      // 修改上次的偏移量及坐标
-      client.offsetX = offsetX
-      client.offsetY = offsetY
-      client.endX = pageX
-      client.endY = pageY
-
-      // 清除以上一次 beginPath 之后的所有路径，进行绘制
-      if (ctx) {
-        ctx.beginPath()
-        // 根据配置文件设置相应配置
-        ctx.lineWidth = lineWidth
-        ctx.strokeStyle = strokeColor
-        ctx.lineCap = lineCap
-        ctx.lineJoin = lineJoin
-        // 设置画线起始点位
-        ctx.moveTo(client.endX - x, client.endY - y)
+      const { left, top } = getCanvasOffset();
+      let offsetX, offsetY, pageX, pageY;
+      if (mobileStatus) {
+        const touch = (event as any).changedTouches[0];
+        pageX = touch.pageX;
+        pageY = touch.pageY;
+        offsetX = pageX - left;
+        offsetY = pageY - top;
+      } else {
+        const mouseEvent = event as MouseEvent;
+        pageX = mouseEvent.pageX;
+        pageY = mouseEvent.pageY;
+        offsetX = pageX - left;
+        offsetY = pageY - top;
       }
-      // 监听 鼠标移动或手势移动
-      window.addEventListener(mobileStatus ? "touchmove" : "mousemove", draw)
+      client.offsetX = offsetX;
+      client.offsetY = offsetY;
+      client.endX = pageX;
+      client.endY = pageY;
+      if (ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = strokeColor;
+        ctx.lineCap = lineCap;
+        ctx.lineJoin = lineJoin;
+        ctx.moveTo(offsetX, offsetY);
+      }
+      window.addEventListener(mobileStatus ? "touchmove" : "mousemove", draw);
     };
 
     // 绘制
     const draw = (event: Event) => {
-      // 获取当前坐标点位
-      const { pageX, pageY } = mobileStatus ? (event as any).changedTouches[0] : event
-      // 修改最后一次绘制的坐标点
-      client.endX = pageX
-      client.endY = pageY
-
+      const { left, top } = getCanvasOffset();
+      let pageX, pageY, offsetX, offsetY;
+      if (mobileStatus) {
+        const touch = (event as any).changedTouches[0];
+        pageX = touch.pageX;
+        pageY = touch.pageY;
+        offsetX = pageX - left;
+        offsetY = pageY - top;
+      } else {
+        const mouseEvent = event as MouseEvent;
+        pageX = mouseEvent.pageX;
+        pageY = mouseEvent.pageY;
+        offsetX = pageX - left;
+        offsetY = pageY - top;
+      }
+      client.endX = pageX;
+      client.endY = pageY;
       if (ctx) {
-        // 根据坐标点位移动添加线条
-        ctx.lineTo(pageX - x, pageY - y)
-
-        // 绘制
-        ctx.stroke()
+        ctx.lineTo(offsetX, offsetY);
+        ctx.stroke();
       }
     };
 
     // 结束绘制
     const closeDraw = () => {
       if (ctx) {
-        // 结束绘制
-        ctx.closePath()
+        ctx.closePath();
       }
-      // 移除鼠标移动或手势移动监听器
-      window.removeEventListener("mousemove", draw)
-      onDrawEnd && onDrawEnd(canvasRef.current)
+      window.removeEventListener(mobileStatus ? "touchmove" : "mousemove", draw);
+      onDrawEnd && onDrawEnd(canvasRef.current);
     };
 
-    // 创建鼠标/手势按下监听器
     window.addEventListener(mobileStatus ? "touchstart" : "mousedown", init);
-    // 创建鼠标/手势 弹起/离开 监听器
     window.addEventListener(mobileStatus ? "touchend" : "mouseup", closeDraw);
+
+    // 清理事件监听，防止内存泄漏
+    return () => {
+      window.removeEventListener(mobileStatus ? "touchstart" : "mousedown", init);
+      window.removeEventListener(mobileStatus ? "touchend" : "mouseup", closeDraw);
+      window.removeEventListener(mobileStatus ? "touchmove" : "mousemove", draw);
+    };
   }, [width, height, lineWidth, strokeColor, lineCap, lineJoin, bgColor, onDrawEnd])
 
   return (

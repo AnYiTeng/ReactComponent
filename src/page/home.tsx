@@ -20,6 +20,7 @@ import ModalInput from '../components/ModalInput'
 import ClassTest from "./classTest";
 import FnTest from "./fnTest";
 import useRecord, { RECORD_STATUS } from '../common/hox/use-record'
+import Progress from '../components/progress'
 import { v4 as uuidv4 } from 'uuid';
 // import { Button, Tabs } from 'antd'
 // import 'antd/dist/antd.css'
@@ -38,6 +39,7 @@ export default function HomePage() {
   const [tabVisible, setTabVisible] = useState(false);
   const [themeChoice, setThemeChoice] = useState(true);
   const [recordMsg, setRecordMsg] = useState('')
+  const [percent, setPercent] = useState(0)
   const recordInfo = useRecord({
     onRecordMessage: (param) => {
       if (param.method === 'setInputText') {
@@ -223,6 +225,9 @@ export default function HomePage() {
         }
       }}>{recordInfo.recordStatus === RECORD_STATUS.RECORDING ? '停止' : '开始'}录音</AButton>
       <div>录音信息: {recordMsg}</div>
+
+      <Progress percent={percent} />
+      <AButton onClick={() => setPercent(Math.random() * 100)}>增加进度</AButton>
     </div>
   );
 }

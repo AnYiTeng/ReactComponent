@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# ReactComponent 组件库开发规则
+
+- 新组件放在 src/components/，文件名小写，样式同名。
+- 组件 props 必须用 TypeScript interface 定义，支持 className、style、children、onClick 等常用属性。
+- 组件样式写在同名 .css 文件，使用 className 组合实现多状态，避免全局污染。
+- 组件统一 export default 导出。
+- 支持 props 透传（...otherProps）。
+- 组件应支持 children 作为内容插槽。
+- 复杂组件可建独立子目录，入口为 index.tsx。
+- 新增组件建议在 src/page/playground/ 或 testComponents/ 下添加示例或测试用例。
+- 主题变量统一放在 src/variables.css 或 theme.css，组件样式可引用。
+- 通用 hooks、工具函数放在 src/common/，避免重复造轮子。

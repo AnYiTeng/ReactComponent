@@ -3,24 +3,20 @@ import React, {
   ReactNode,
   useState,
   useRef,
-  useEffect,
+  useEffect
 } from "react";
 import "./carousel.css";
 import classnames from "classnames";
-import { useGesture, useDrag } from "react-use-gesture";
 
 interface IACarouselProps {
   className?: string;
   style?: CSSProperties;
-  children?: ReactNode;
+  children?: ReactNode[];
   duration?: number;
   currentIndex?: number;
   isAutoPlay?: boolean;
-}
-
-interface IACarouselInstance {
-  next: () => void;
-  prev: () => void;
+  width?: number | string;
+  height?: number | string;
 }
 
 export default function ACarousel(props: IACarouselProps) {
@@ -28,132 +24,97 @@ export default function ACarousel(props: IACarouselProps) {
     className,
     style,
     children = [
-      <img src="https://mmsite.alicdn.com/42deaf65-3c70-4281-91d1-40a9e7ac0441.jpg" />,
-      <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png" />,
-      <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png" />,
+      <img src="https://mmsite.alicdn.com/42deaf65-3c70-4281-91d1-40a9e7ac0441.jpg" alt="1" />,
+      <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png" alt="2" />,
+      <img src="https://mmsite.alicdn.com/863f6c64-e23c-4b90-917a-c6534c4833a6.png" alt="3" />
     ],
     duration = 3000,
-    currentIndex = 1,
+    currentIndex = 0,
     isAutoPlay = true,
+    width = 300,
+    height = 160
   } = props;
 
-  // 当前显示在第几页
   const [active, setActive] = useState(currentIndex);
-
+  const [containerWidth, setContainerWidth] = useState<number>(typeof width === 'number' ? width : 300);
   const autoPlayIntervalRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const count = React.Children.count(children);
 
-  const cls = classnames("a-carousel", className);
-
-  const allCarouselContainer = useRef<any>(null);
-  const container = useRef<any>(null);
-
-  // 获取当前容器的宽度
-  const containerWidth = container?.current?.clientWidth;
-
+  // 宽度自适应
   useEffect(() => {
-    setTransition();
-  }, [active]);
+    function updateWidth() {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    }
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
-  const setTransition = () => {
-    // 计算需要移动的距离并修改
-    const distance = (1 - active) * containerWidth;
-    allCarouselContainer.current.style.transform = `translate3d(${distance}px, 0, 0)`;
-  };
+  // 自动播放
+  useEffect(() => {
+    if (!isAutoPlay) return;
+    autoPlayIntervalRef.current = setInterval(() => {
+      setActive(prev => (prev + 1) % count);
+    }, duration);
+    return () => clearInterval(autoPlayIntervalRef.current);
+  }, [isAutoPlay, duration, count]);
 
-  // 上一页
-  const hanldPrev = () => {
-    // 处理临界情况
-    setActive(active === 1 ? React.Children.count(children) : active - 1);
-  };
-
-  // 下一页
-  const hanldNext = () => {
-    // 处理临界情况
-    setActive(active === React.Children.count(children) ? 1 : active + 1);
-  };
-
-  const stop = () => {
+  // 鼠标悬停暂停
+  const handleMouseEnter = () => {
     clearInterval(autoPlayIntervalRef.current);
   };
-
-  const autoPlay = () => {
-    stop();
-    autoPlayIntervalRef.current = setInterval(hanldNext, duration);
+  const handleMouseLeave = () => {
+    if (isAutoPlay) {
+      autoPlayIntervalRef.current = setInterval(() => {
+        setActive(prev => (prev + 1) % count);
+      }, duration);
+    }
   };
 
-  useEffect(() => {
-    isAutoPlay && autoPlay();
-    return () => {
-      clearInterval(autoPlayIntervalRef.current);
-    };
-  }, [children]);
+  // 切换
+  const goTo = (idx: number) => setActive(idx);
+  const prev = () => setActive(active === 0 ? count - 1 : active - 1);
+  const next = () => setActive((active + 1) % count);
 
-  // 鼠标移入之后停止轮播
-  const carouselContainer = document.getElementById("carouselContainer");
-  if (carouselContainer) {
-    carouselContainer.onmouseover = function () {
-      stop();
-    };
-    carouselContainer.onmouseout = function () {
-      isAutoPlay && autoPlay();
-    };
-  }
-
-  const isDraged = useRef(false);
-  const bind = useGesture({
-    onDragStart: () => {
-      stop();
-      isDraged.current = false;
-    },
-    onDrag: ({ movement: [x] }) => {
-      if (isDraged.current) {
-        return;
-      }
-      if (x > 50) {
-        hanldPrev();
-        isDraged.current = true;
-      } else if (x < -50) {
-        hanldNext();
-        isDraged.current = true;
-      }
-    },
-    onDragEnd: () => {
-      isDraged.current = false;
-      isAutoPlay && autoPlay();
-    },
-  });
+  // 轮播内容样式
+  const trackStyle: React.CSSProperties = {
+    width: containerWidth * count,
+    display: 'flex',
+    transform: `translateX(${-active * containerWidth}px)`,
+    transition: 'transform 0.5s cubic-bezier(.4,0,.2,1)'
+  };
 
   return (
-    <>
-      <div {...bind()} ref={container} className={cls}>
-        {/* <div ref={container} className={cls}> */}
-        <div
-          id="carouselContainer"
-          ref={allCarouselContainer}
-          className="a-carousel-container"
-        >
-          {containerWidth &&
-            React.Children.map(children, (child, index) => {
-              return (
-                <div
-                  style={{ left: index * containerWidth }}
-                  className="a-carousel-item"
-                >
-                  {child}
-                </div>
-              );
-            })}
-        </div>
-
-        <div>
-          <div onClick={hanldPrev} className="a-carousel-left-btn">
-            Left
+    <div
+      className={classnames('a-carousel', className)}
+      style={{ width, height, ...style, position: 'relative', overflow: 'hidden' }}
+      ref={containerRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="a-carousel-track" style={trackStyle}>
+        {React.Children.map(children, (child, idx) => (
+          <div className="a-carousel-item" style={{ width: containerWidth, height: '100%', flexShrink: 0 }}>
+            {child}
           </div>
-          <div onClick={hanldNext} className="a-carousel-right-btn">
-            Right
-          </div>
-        </div>
+        ))}
       </div>
-    </>
+      {/* 指示点 */}
+      <div className="a-carousel-dots">
+        {Array.from({ length: count }).map((_, idx) => (
+          <span
+            key={idx}
+            className={classnames('a-carousel-dot', { active: idx === active })}
+            onClick={() => goTo(idx)}
+          />
+        ))}
+      </div>
+      {/* 左右按钮 */}
+      <button className="a-carousel-btn a-carousel-btn-left" onClick={prev} aria-label="上一张" type="button">&#8592;</button>
+      <button className="a-carousel-btn a-carousel-btn-right" onClick={next} aria-label="下一张" type="button">&#8594;</button>
+    </div>
   );
 }
