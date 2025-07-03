@@ -10,7 +10,7 @@ import ACollapse from "../components/collapse";
 import AComment from "../components/comment";
 import ADropdown from "../components/dropdown";
 import ACarousel from "../components/carousel";
-import Rate from "../components/rates";
+// import Rate from "../components/rates";
 import ChangeTheme from "./changeTheme";
 import ASign from "../components/sign/sign";
 import "./home.css";
@@ -21,6 +21,7 @@ import ClassTest from "./classTest";
 import FnTest from "./fnTest";
 import useRecord, { RECORD_STATUS } from '../common/hox/use-record'
 import Progress from '../components/progress'
+import Rate from '../components/rate'
 import { v4 as uuidv4 } from 'uuid';
 // import { Button, Tabs } from 'antd'
 // import 'antd/dist/antd.css'
@@ -40,6 +41,7 @@ export default function HomePage() {
   const [themeChoice, setThemeChoice] = useState(true);
   const [recordMsg, setRecordMsg] = useState('')
   const [percent, setPercent] = useState(0)
+  const [score, setScore] = useState(0)
   const recordInfo = useRecord({
     onRecordMessage: (param) => {
       if (param.method === 'setInputText') {
@@ -228,6 +230,7 @@ export default function HomePage() {
 
       <Progress percent={percent} />
       <AButton onClick={() => setPercent(Math.random() * 100)}>增加进度</AButton>
+      <Rate allowHalf value={score} onChange={setScore} max={10} />
     </div>
   );
 }
