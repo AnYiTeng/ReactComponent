@@ -639,7 +639,7 @@
         2、请求 MCP Server，返回一个tools工具列表<br>
         3、设置 message，包括用户提问的问题 user prompt 和 system prompt<br>
         4、将 tools 和 message 传给 llg<br>
-        5、查看 llg 返回的 finish_reason 是否为 stop，是的话直接返回 llg 返回的结果；否则查看是否有 tool_calls，有的话调用 tool_calls 中推荐的 too 方法，并塞入到 message 中再传给大模型<br>
+        5、查看 llg 返回的 finish_reason 是否为 stop，是的话直接返回 llg 返回的结果；否则查看是否有 tool_calls，有的话调用 tool_calls 中推荐的 tool 方法，并塞入到 message 中再传给大模型<br>
         6、大模型根据最终的 message 生成最终回答
       </div>
     </ul>
