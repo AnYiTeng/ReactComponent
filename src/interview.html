@@ -714,6 +714,45 @@
       reader.releaseLock();
     }
   }
+  // 解析流式事件
+  private _parseStreamEvent(data: string) {
+    if (!data || data === '[DONE]' || data === '[done]') return null;
+    try {
+      const parsed = JSON.parse(data);
+
+      // 兼容菜包返回流格式
+      if (parsed.success !== undefined && parsed.data?.name === 'message') {
+        return {
+          finish_reason: parsed.data.type === 'finish' ? 'stop' : null,
+          content: parsed.data.text || '',
+          tool_calls: undefined,
+          usage: undefined,
+        };
+      }
+
+      // 检查是否为DashScope格式
+      if (parsed.output && parsed.output.text !== undefined) {
+        return {
+          finish_reason: parsed.output.finish_reason,
+          content: parsed.output.text,
+          tool_calls: undefined, // DashScope格式中没有tool_calls
+          usage: parsed.usage,
+        };
+      }
+
+      // 兼容OpenAI格式
+      const choice = parsed.choices?.[0];
+      return {
+        finish_reason: choice?.finish_reason,
+        content: choice?.delta?.content,
+        tool_calls: choice?.delta?.tool_calls,
+        usage: parsed?.usage,
+      };
+    } catch (e) {
+      logger.error('解析流式事件失败:', data, (e as Error).message);
+      return null;
+    }
+  }
   // 发送流式请求
   const stream = await llmCall.sendMessage({
     apiKey,
