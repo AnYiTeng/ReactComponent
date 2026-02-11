@@ -647,6 +647,159 @@
       <b>AI Agent：</b><br>
       简单来说，Agent 是具备自主性（Autonomy）的 AI 系统，它们不仅仅是被动地响应，更能主动地感知环境（Perception）、制定计划（Planning）、<b>做出决策（Decision Making）并采取行动（Action）</b>以达成特定目标。
     </div>
+
+
+    <!-- 解析流式响应参考 -->
+    <code>
+      // 解析流式响应
+    async *parseStreamResponse(response: Response): AsyncGenerator<StreamEvent, void, unknown> {
+    if (!response.body)
+      throw new Error(
+        $i18n.get({ id: 'ResponseBodyIsEmpty', dm: '响应 body 为空', ns: 'CnDdRichEditor' }),
+      );
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    const toolCallsBuffer = new Map<number, any>();
+
+    // 串联本次对话的所有信息，用于后续的工具调用和消息匹配
+    const uuid = `msg_${v4()}`;
+
+    try {
+      let finish_reason: string | null = null;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          yield* this._emitToolCalls(toolCallsBuffer, uuid);
+          yield new StreamFinishMessage(finish_reason, uuid);
+          break;
+        }
+
+        for (const line of decoder.decode(value).split('\n')) {
+          if (!line.startsWith('data:')) continue;
+
+          const data = line.replace(/^data:\s?/, '');
+          const event = this._parseStreamEvent(data);
+
+          if (event?.finish_reason) finish_reason = event.finish_reason;
+          if (event?.content)
+            yield { type: 'assistant' as const, content: event.content, messageId: uuid };
+          if (event?.tool_calls) this._updateToolCallsBuffer(toolCallsBuffer, event.tool_calls);
+          if (event?.usage) {
+            logger.log(
+              'Tokens Usage 统计\n',
+              `输入: ${event.usage.prompt_tokens} | 输出 ${event.usage.completion_tokens} | 总计: ${event.usage.total_tokens}`,
+            );
+
+            if (event?.usage?.prompt_tokens) {
+              this._totalPromptTokens += event.usage.prompt_tokens;
+            }
+            if (event?.usage?.completion_tokens) {
+              this._totalCompletionTokens += event.usage.completion_tokens;
+            }
+            // 累加并 console 输出所有请求 token 数的累积值
+            if (event?.usage?.total_tokens) {
+              this._totalTokens += event.usage.total_tokens;
+            }
+
+            logger.log(
+              `总输入: ${this._totalPromptTokens} | 总输出: ${this._totalCompletionTokens} ｜ 累计总tokens: ${this._totalTokens}`,
+            );
+            logger.log('--------------tokens------------------');
+          }
+        }
+      }
+    } finally {
+      reader.releaseLock();
+    }
+  }
+  // 发送流式请求
+  const stream = await llmCall.sendMessage({
+    apiKey,
+    baseUrl: apiUrl,
+    systemPrompt: contentToSend,
+    stream: true,
+    sessionName: promptValue,
+  });
+  // 检查是否为异步生成器
+  if (Symbol.asyncIterator in stream) {
+    // 清空累积内容
+    accumulatedContentRef.current = '';
+    // 保存原始内容HTML
+    originalHtmlRef.current = currentContent || '';
+
+    // 逐个处理流式响应
+    for await (const chunk of stream) {
+      console.info('chunk:', chunk);
+      if (chunk.type === 'assistant' && chunk.content) {
+        // 累积流式内容
+        accumulatedContentRef.current += chunk.content;
+
+        // 流式过程中：原内容 + 流式文本（纯文本包裹在p标签中，带标识样式）
+        const streamingHtml = `${originalHtmlRef.current}<p> ${accumulatedContentRef.current}</p>`;
+        try {
+          const streamingValue = mo.htmlToValue(streamingHtml);
+          if (streamingValue) {
+            controllerRef.current?.setValue(streamingValue);
+            // setValue后恢复焦点，触发视图刷新
+            requestAnimationFrame(() => {
+              try {
+                controllerRef.current?.command(Commands.focus);
+              } catch (e) {
+                console.error(e);
+              }
+            });
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      } else if (chunk.type === 'finish') {
+        // 流式输出完成：原内容 + 解析后的最终HTML
+        let finalHtml = originalHtmlRef.current;
+        try {
+          // 尝试解析最终内容为HTML
+          const testParse = mo.htmlToValue(accumulatedContentRef.current);
+          if (testParse && testParse.document) {
+            // 解析成功，直接拼接HTML
+            finalHtml = `${originalHtmlRef.current}${accumulatedContentRef.current}`;
+          } else {
+            // 解析失败，包裹为p标签
+            finalHtml = `${originalHtmlRef.current}<p>${accumulatedContentRef.current}</p>`;
+          }
+        } catch (parseError) {
+          // 解析失败，包裹为p标签
+          finalHtml = `${originalHtmlRef.current}<p>${accumulatedContentRef.current}</p>`;
+        }
+
+        // 设置最终内容
+        try {
+          const finalValue = mo.htmlToValue(finalHtml);
+          if (finalValue) {
+            controllerRef.current?.setValue(finalValue);
+            // setValue后恢复焦点，触发视图刷新
+            requestAnimationFrame(() => {
+              try {
+                controllerRef.current?.command(Commands.focus);
+              } catch (e) {
+                // 忽略focus错误
+              }
+            });
+          }
+        } catch (e) {
+          // 最终处理失败的提示
+          CnMessage.warning(
+            $i18n.get({
+              id: 'ContentParsingFailedPleaseTryAga_1255897805',
+              dm: '内容解析失败，请重试',
+              ns: 'CnDdRichEditor',
+            }),
+          );
+        }
+      }
+    }
+  }
+    </code>
   </div>
   <!-- 手写题和脚本部分保留原样 -->
   <script>
