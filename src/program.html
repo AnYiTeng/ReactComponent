@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <h1>CNUI 组件 AI 代码生成助手</h1>
+    <div>
+      <h2>核心实现流程</h2>
+      <div>
+        1. 链接MCP服务，获取可用工具列表，让AI知道能够调用哪些工具获取数据
+        2. 组装对话，把用户的提问加系统提示词一起发给大模型，告诉AI怎么写代码、按什么格式输出
+        3. 大模型推理，调用 qwen3-coder-plus 模型，AI 理解需求并生成代码
+        4. 工具调用，如果 AI 判断需要查组件 props/列表/demo/模板，就调用对应工具，生成更准确、符合组件规范的代码
+        5. 结果清洗与转换，去掉 markdown 代码块、按设备类型转换组件库，输出能直接在编辑器里运行的组件代码
+      </div>
+      <h2>一句话总结</h2>
+      <div>对接大模型和组件工具链，根据用户输入自动生成符合设备类型（PC/移动）的 CNUI 组件代码，并完成代码清洗与组件库适配，让编辑器具备"一句话出代码"的能力</div>
+    </div>
+
+    <h1>Cone CLI 智能 Agent 插件</h1>
+    <div>
+      
+    </div>
+  </div>
+</body>
+</html>
